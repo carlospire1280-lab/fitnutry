@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#16a34a" />
+  <title>FitNutri — Nutrición y Hábitos</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="splash">
+    <div id="splash-bg"></div>
+    <div class="splash-logo">
+      <svg viewBox="0 0 64 64" width="84" height="84" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="16" fill="#16a34a"/>
+        <circle cx="32" cy="37" r="17" fill="#ffffff"/>
+        <ellipse cx="32" cy="26" rx="9" ry="5.5" fill="#15803d" transform="rotate(-18 32 26)"/>
+        <rect x="30.6" y="27" width="2.8" height="9" rx="1.4" fill="#15803d" transform="rotate(-18 30.6 27)"/>
+      </svg>
+    </div>
+    <div class="splash-name">FitNutri</div>
+    <div class="splash-tag">Tu camino al bienestar</div>
+    <div class="splash-quote" id="splash-quote"></div>
+  </div>
+
+  <div id="onboard" class="onboard" style="display:none">
+    <div class="onboard-card">
+      <div class="onboard-slide" id="ob-slide">
+        <div class="ob-emoji" id="ob-emoji">🎯</div>
+        <h2 id="ob-title"></h2>
+        <p id="ob-text"></p>
+      </div>
+      <div class="ob-dots" id="ob-dots"></div>
+      <div class="ob-btns">
+        <button id="ob-skip" class="ghost-btn" style="width:auto;margin:0">Saltar</button>
+        <button id="ob-next" style="flex:1">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="app-header">
+    <h1>
+      <svg class="logo" viewBox="0 0 64 64" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="16" fill="#ffffff" opacity=".18"/>
+        <circle cx="32" cy="37" r="17" fill="#ffffff"/>
+        <ellipse cx="32" cy="26" rx="9" ry="5.5" fill="#15803d" transform="rotate(-18 32 26)"/>
+        <rect x="30.6" y="27" width="2.8" height="9" rx="1.4" fill="#15803d" transform="rotate(-18 30.6 27)"/>
+      </svg>
+      FitNutri
+    </h1>
+    <nav class="tabs">
+      <div class="tab-ink" id="tab-ink"></div>
+      <button class="tab active" data-tab="dashboard">Inicio</button>
+      <button class="tab" data-tab="comidas">Comidas</button>
+      <button class="tab" data-tab="ejercicios">Ejercicios</button>
+      <button class="tab" data-tab="habitos">Hábitos</button>
+      <button class="tab" data-tab="plan">Plan</button>
+      <button class="tab" data-tab="recetas">Recetas</button>
+      <button class="tab" data-tab="lista">Lista</button>
+      <button class="tab" data-tab="pendientes">📋</button>
+      <button class="tab" data-tab="progreso">Progreso</button>
+      <button class="tab" data-tab="ajustes">Ajustes</button>
+      <button class="tab" data-tab="secreto">💌</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INICIO -->
+    <section id="dashboard" class="panel active">
+      <div class="cards">
+        <div class="card"><span class="card-num" id="stat-habitos">0/0</span><span class="card-label">Hábitos hoy</span></div>
+        <div class="card"><span class="card-num" id="stat-comidas">0/4</span><span class="card-label">Comidas hechas</span></div>
+        <div class="card"><span class="card-num" id="stat-agua">0%</span><span class="card-label">Agua (meta 2L)</span></div>
+        <div class="card"><span class="card-num" id="stat-kcal">0</span><span class="card-label">Kcal consumidas</span></div>
+      </div>
+      <div class="panel-box">
+        <h2>Resumen de hoy</h2>
+        <div class="progress"><div class="progress-bar" id="bar-habitos"></div></div>
+        <p id="resumen-texto">—</p>
+        <p id="resumen-kcal" class="hint"></p>
+      </div>
+      <div class="panel-box">
+        <h2>🏆 Últimos logros</h2>
+        <div id="dash-achievements" class="badges"></div>
+      </div>
+      <div class="panel-box">
+        <h2>📅 Esta semana</h2>
+        <div id="week-summary" class="week-summary"></div>
+      </div>
+    </section>
+
+    <!-- COMIDAS -->
+    <section id="comidas" class="panel">
+      <h2>Plan alimenticio</h2>
+      <p class="hint">Marca las comidas que ya consumiste.</p>
+      <div id="meal-list" class="meal-list"></div>
+      <div class="cheat-row">
+        <button id="cheat-toggle" class="ghost-btn" style="width:auto;margin:0;padding:8px 14px">🍕 Día de trampa</button>
+        <span id="cheat-badge" class="hint" style="margin:0"></span>
+      </div>
+      <div class="caf-row">
+        <span class="hint" style="margin:0">☕ Cafeína / azúcar:</span>
+        <span id="caf-text">☕ 0 · 🍬 0</span>
+        <button id="caf-btn" class="mini-btn">+Café</button>
+        <button id="sugar-btn" class="mini-btn">+Azúcar</button>
+        <button id="caf-reset" class="mini-btn">↺</button>
+      </div>
+
+      <div class="agua-box panel-box">
+        <h3>💧 Agua</h3>
+        <div class="agua-controls">
+          <button id="agua-250">+250 ml</button>
+          <button id="agua-500">+500 ml</button>
+          <button id="agua-reset">Reiniciar</button>
+        </div>
+        <div class="progress"><div class="progress-bar agua" id="bar-agua"></div></div>
+        <p id="agua-texto">0 ml / 2000 ml</p>
+      </div>
+
+      <div class="panel-box">
+        <h2>🍽️ Registrar alimento</h2>
+        <form id="food-form" class="food-form">
+          <div class="food-name-row">
+            <input type="text" id="f-name" list="food-options" placeholder="Alimento (ej: Manzana)" required />
+            <button type="button" id="barcode-btn" class="ghost-btn" style="width:auto;margin:0;padding:10px 14px" title="Escanear código de barras">📷</button>
+          </div>
+          <datalist id="food-options"></datalist>
+          <div class="food-grid">
+            <input type="number" id="f-kcal" placeholder="Kcal (por 100g)" min="0" required />
+            <input type="number" id="f-qty" placeholder="Cantidad (g)" min="1" />
+            <input type="number" id="f-prot" placeholder="Prot (g/100g)" min="0" />
+            <input type="number" id="f-carb" placeholder="Carbs (g/100g)" min="0" />
+            <input type="number" id="f-fat" placeholder="Grasas (g/100g)" min="0" />
+          </div>
+          <button type="submit">Añadir</button>
+        </form>
+        <p id="food-hint" class="hint" style="margin:4px 0 0"></p>
+        <div id="food-totals" class="food-totals"></div>
+        <div id="food-list" class="food-list"></div>
+      </div>
+    </section>
+
+    <!-- EJERCICIOS -->
+    <section id="ejercicios" class="panel">
+      <h2>Plan de ejercicios</h2>
+      <p class="hint">Día de la semana: <strong id="dia-semana"></strong> · Semana del plan: <strong id="plan-week"></strong></p>
+      <div id="week-strip" class="week-strip"></div>
+      <div id="exercise-list" class="exercise-list"></div>
+
+      <div class="panel-box">
+        <h2>🏋️ Rutina de fuerza</h2>
+        <p class="hint" id="gym-week"></p>
+        <p class="hint">Fuerza: lunes tren inferior, jueves tren superior. Marca lo completado e indica el peso usado. Tu mejor peso en cada ejercicio es tu PR 🏆 · 🔄 cambia por alternativa</p>
+        <div id="gym-list" class="gym-list"></div>
+        <div class="rest-timer">
+          <h3>😴 Descanso entre series</h3>
+          <div class="timer-display" id="rest-display" style="font-size:2rem">60</div>
+          <div class="agua-controls">
+            <button id="rest-start">▶ Descanso</button>
+            <button id="rest-reset">↺</button>
+            <label class="hint" style="margin:0">Segundos <input type="number" id="rest-secs" value="60" min="10" max="300" style="width:70px" /></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <h2>⏱️ Temporizador de intervalos</h2>
+        <div class="timer-display" id="timer-display">40</div>
+        <div class="agua-controls">
+          <button id="timer-start">▶ Empezar</button>
+          <button id="timer-reset">↺ Reiniciar</button>
+        </div>
+        <div class="food-grid" style="margin-top:8px">
+          <label>Trabajo <input type="number" id="t-work" value="40" min="5" /></label>
+          <label>Descanso <input type="number" id="t-rest" value="15" min="5" /></label>
+          <label>Series <input type="number" id="t-rounds" value="8" min="1" max="30" /></label>
+        </div>
+      </div>
+
+      <div class="panel-box" id="fasting-box">
+        <h2>⏳ Ayuno intermitente 16:8</h2>
+        <p class="hint">16 horas de ayuno, 8 de alimentación.</p>
+        <div id="fasting-status" class="fasting-status">Ayuno no iniciado</div>
+        <div class="agua-controls">
+          <button id="fast-start">🍽️ Dejar de comer (iniciar ayuno)</button>
+          <button id="fast-stop">✕ Terminar ayuno</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HABITOS -->
+    <section id="habitos" class="panel">
+      <h2>Hábitos diarios</h2>
+      <p class="hint">Los hábitos se reinician cada día. Mantén la racha 🔥</p>
+      <form id="habit-form" class="food-form">
+        <input type="text" id="h-emoji" placeholder="😀" maxlength="4" style="max-width:70px" />
+        <input type="text" id="h-title" placeholder="Nuevo hábito (ej: Meditar 10 min)" required />
+        <button type="submit">Añadir</button>
+      </form>
+      <div id="habit-list" class="habit-list"></div>
+      <div id="racha-box" class="racha-box panel-box"></div>
+      <div class="panel-box">
+        <h2>📅 Constancia</h2>
+        <div id="habit-heatmap"></div>
+      </div>
+    </section>
+
+    <!-- PLAN -->
+    <section id="plan" class="panel">
+      <h2>Tu plan personalizado</h2>
+      <p class="hint">Calculamos tus calorías y macros según tu cuerpo y objetivo.</p>
+      <form id="plan-form" class="plan-form">
+        <div class="food-grid">
+          <label>Sexo
+            <select id="p-sex">
+              <option value="h">Hombre</option>
+              <option value="m">Mujer</option>
+            </select>
+          </label>
+          <label>Edad <input type="number" id="p-age" min="10" max="100" required /></label>
+          <label>Peso (kg) <input type="number" id="p-weight" min="30" max="250" step="0.1" required /></label>
+          <label>Altura (cm) <input type="number" id="p-height" min="120" max="230" required /></label>
+          <label>Actividad
+            <select id="p-activity">
+              <option value="1.2">Sedentario</option>
+              <option value="1.375" selected>Ligero (1-3 días)</option>
+              <option value="1.55">Moderado (3-5 días)</option>
+              <option value="1.725">Intenso (6-7 días)</option>
+              <option value="1.9">Atleta</option>
+            </select>
+          </label>
+          <label>Objetivo
+            <select id="p-goal">
+              <option value="-500">🔥 Perder grasa</option>
+              <option value="0" selected>Mantener peso</option>
+              <option value="300">💪 Ganar músculo</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit">Calcular mi plan</button>
+      </form>
+      <div id="plan-result" class="panel-box" style="display:none">
+        <h2>🎯 Tus objetivos diarios</h2>
+        <div class="macro-cards" id="macro-cards"></div>
+        <div id="plan-extra"></div>
+      </div>
+    </section>
+
+    <!-- RECETAS -->
+    <section id="recetas" class="panel">
+      <h2>Recetas saludables</h2>
+      <p class="hint">Recetas rápidas, altas en proteína.</p>
+      <div class="agua-controls">
+        <button id="menu-gen" class="ghost-btn" style="width:auto;margin:0">✨ Generar menú semanal</button>
+        <button id="menu-list" class="ghost-btn" style="width:auto;margin:0">🛒 Añadir ingredientes a la lista</button>
+      </div>
+      <div id="menu-result" class="panel-box" style="margin-top:14px"></div>
+      <div id="recipe-list" class="recipe-list" style="margin-top:14px"></div>
+    </section>
+
+    <!-- LISTA DE COMPRAS -->
+    <section id="lista" class="panel">
+      <h2>🛒 Lista de compras</h2>
+      <p class="hint">Marca lo que ya compraste.</p>
+      <form id="list-form" class="food-form">
+        <input type="text" id="l-item" placeholder="Añadir alimento..." required />
+        <button type="submit">Añadir</button>
+      </form>
+      <button id="list-autogen" class="ghost-btn">✨ Generar desde mi plan</button>
+      <div id="list-items" class="food-list"></div>
+      <button id="list-clear" class="ghost-btn danger">Vaciar lista</button>
+    </section>
+
+    <!-- PENDIENTES -->
+    <section id="pendientes" class="panel">
+      <h2>📋 Pendientes</h2>
+      <p class="hint">Anota lo que tienes que hacer y márcalo al completarlo.</p>
+      <form id="todo-form" class="food-form">
+        <input type="text" id="todo-input" placeholder="Nuevo pendiente (ej: Llamar al banco)" required />
+        <button type="submit">Añadir</button>
+      </form>
+      <div id="todo-list" class="food-list"></div>
+      <button id="todo-clear" class="ghost-btn danger">Limpiar completados</button>
+    </section>
+
+    <!-- PROGRESO -->
+    <section id="progreso" class="panel">
+      <h2>⚖️ Registro de peso</h2>
+      <form id="weight-form" class="food-form">
+        <input type="number" id="w-kg" placeholder="Peso (kg)" min="30" max="250" step="0.1" required />
+        <button type="submit">Registrar hoy</button>
+      </form>
+      <div id="weight-chart" class="panel-box"></div>
+
+      <div class="panel-box">
+        <h2>📏 Medidas corporales</h2>
+        <form id="measures-form" class="food-grid">
+          <label>Cintura (cm) <input type="number" id="m-cintura" min="40" max="200" step="0.5" /></label>
+          <label>Pecho (cm) <input type="number" id="m-pecho" min="50" max="200" step="0.5" /></label>
+          <label>Brazo (cm) <input type="number" id="m-brazo" min="15" max="80" step="0.5" /></label>
+          <label>Cadera (cm) <input type="number" id="m-cadera" min="50" max="200" step="0.5" /></label>
+        </form>
+        <button type="submit" form="measures-form">Registrar medidas</button>
+        <div id="measures-list" style="margin-top:10px"></div>
+      </div>
+
+      <div class="panel-box">
+        <h2>👟 Pasos</h2>
+        <p class="hint" id="steps-today">0 pasos hoy</p>
+        <form id="steps-form" class="food-form">
+          <input type="number" id="steps-input" placeholder="Pasos" min="1" max="50000" />
+          <button type="submit">Añadir</button>
+        </form>
+        <div class="agua-controls">
+          <button id="steps-500" class="ghost-btn" style="width:auto;margin:0;padding:8px 14px">+500</button>
+          <button id="steps-1000" class="ghost-btn" style="width:auto;margin:0;padding:8px 14px">+1,000</button>
+        </div>
+        <div id="steps-chart"></div>
+      </div>
+
+      <div class="panel-box">
+        <h2>🔥 Calorías últimos 7 días</h2>
+        <div id="kcal-chart"></div>
+      </div>
+
+      <div class="panel-box">
+        <h2>🥩 Macros promedio (7 días)</h2>
+        <div id="macros-chart"></div>
+      </div>
+
+      <div class="panel-box">
+        <h2>🍩 Gráficas</h2>
+        <div id="pie-charts" class="pie-charts"></div>
+      </div>
+
+      <div class="panel-box">
+        <div class="share-row">
+          <h2 style="margin:0">📤 Compartir progreso</h2>
+          <div>
+            <button id="share-btn" class="ghost-btn" style="width:auto;margin:0;padding:8px 14px">Compartir</button>
+            <button id="csv-btn" class="ghost-btn" style="width:auto;margin:0 0 0 8px;padding:8px 14px">⬇️ CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <h2>🏅 Logros</h2>
+        <div id="achievements" class="badges"></div>
+      </div>
+    </section>
+
+    <!-- AJUSTES -->
+    <section id="ajustes" class="panel">
+      <h2>👤 Perfiles</h2>
+      <div class="panel-box">
+        <div class="profile-row">
+          <select id="profile-select"></select>
+          <button id="profile-del" class="ghost-btn danger" style="width:auto;margin:0;padding:8px 14px">🗑️</button>
+        </div>
+        <form id="profile-form" class="food-form">
+          <input type="text" id="p-name" placeholder="Nombre del nuevo perfil" required />
+          <button type="submit">Crear perfil</button>
+        </form>
+      </div>
+
+      <div class="panel-box">
+        <h2>🔔 Recordatorio diario</h2>
+        <label class="switch-row">
+          <span>Activar recordatorio</span>
+          <input type="checkbox" id="remind-toggle" />
+        </label>
+        <div class="food-grid" style="margin-top:10px">
+          <label>Hora
+            <input type="time" id="remind-time" value="20:00" />
+          </label>
+        </div>
+        <p class="hint" id="remind-status"></p>
+      </div>
+
+      <div class="panel-box">
+        <h2>🔔 Recordatorio de peso</h2>
+        <label class="switch-row">
+          <span>Aviso semanal (lunes)</span>
+          <input type="checkbox" id="weight-remind-toggle" />
+        </label>
+        <div class="food-grid" style="margin-top:10px">
+          <label>Hora
+            <input type="time" id="weight-remind-time" value="09:00" />
+          </label>
+        </div>
+        <p class="hint" id="weight-remind-status"></p>
+      </div>
+
+      <div class="panel-box">
+        <h2>💧 Meta de agua</h2>
+        <div class="food-grid">
+          <label>Mililitros diarios
+            <input type="number" id="water-goal" min="250" max="10000" step="250" />
+          </label>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <h2>Apariencia</h2>
+        <label class="switch-row">
+          <span>🌙 Modo oscuro</span>
+          <input type="checkbox" id="dark-toggle" />
+        </label>
+        <p class="hint" style="margin:14px 0 8px">🖼️ Fondo de pantalla</p>
+                <!-- EDITABLE: colores de muestra de los fondos (data-wp debe coincidir con styles.css) -->
+        <div class="wp-row">
+          <button type="button" class="wp-btn" data-wp="negro"><i style="background:#000"></i>Negro</button>
+          <button type="button" class="wp-btn" data-wp="morado"><i style="background:#7c3aed"></i>Morado</button>
+          <button type="button" class="wp-btn" data-wp="azul"><i style="background:#2563eb"></i>Azul</button>
+          <button type="button" class="wp-btn" data-wp="rojo"><i style="background:#dc2626"></i>Rojo</button>
+          <button type="button" class="wp-btn" data-wp="verde"><i style="background:#16a34a"></i>Verde</button>
+        </div>
+        <p class="hint" style="margin:8px 0 0">Toca el fondo activo para volver al diseño normal.</p>
+      </div>
+
+      <div class="panel-box">
+        <h2>Datos</h2>
+        <button id="export-btn" class="ghost-btn">⬇️ Exportar mis datos</button>
+        <button id="reset-btn" class="ghost-btn danger">🗑️ Borrar todos los datos</button>
+      </div>
+    </section>
+
+    <!-- SECRETO -->
+    <section id="secreto" class="panel">
+      <div id="secret-lock" class="panel-box" style="max-width:400px;margin:50px auto;text-align:center">
+        <div style="font-size:3rem">💌</div>
+        <h2>Sección secreta</h2>
+        <p class="hint">Solo para ella 🔒</p>
+        <input type="password" id="secret-pass" placeholder="Contraseña" style="width:100%;margin-bottom:10px" />
+        <button id="secret-unlock" style="width:100%">Desbloquear</button>
+        <p class="hint" id="secret-lock-msg" style="margin-top:8px"></p>
+      </div>
+      <div id="secret-content" style="display:none">
+        <h2>💌 Para ella</h2>
+        <div class="panel-box">
+          <h3>📸 Antes y después</h3>
+          <input type="file" id="photo-input" accept="image/*" multiple hidden />
+          <button id="photo-add" class="ghost-btn">📸 Subir foto de progreso</button>
+          <p class="hint" style="margin-top:8px">Las fotos se guardan en este dispositivo (se comprimen automáticamente).</p>
+          <div id="photos-grid" class="photos-grid"></div>
+        </div>
+        <div class="panel-box">
+          <h3>🎧 Mi música</h3>
+          <p class="hint">Elige las canciones de tu teléfono (MP3, M4A, etc.) — se guardan dentro de la app y suenan sin internet.</p>
+          <input type="file" id="music-input" accept="audio/*" multiple hidden />
+          <button id="music-add" class="ghost-btn">🎵 Elegir música de mi celular</button>
+          <div id="player-bar" class="player-bar" style="display:none">
+            <div class="player-info">
+              <span id="np-title">—</span>
+              <span id="np-size" class="hint"></span>
+            </div>
+            <input type="range" id="np-seek" min="0" max="1000" value="0" />
+            <div class="agua-controls" style="justify-content:center">
+              <button id="np-prev">⏮</button>
+              <button id="np-play">▶</button>
+              <button id="np-next">⏭</button>
+            </div>
+          </div>
+          <div id="music-list"></div>
+        </div>
+        <div class="panel-box">
+          <h3>📖 Modo historia</h3>
+          <p class="hint">Tu camino, semana a semana.</p>
+          <div id="history-timeline" class="timeline"></div>
+        </div>
+        <div class="panel-box">
+          <h3>🔐 Mensaje secreto</h3>
+          <div id="secret-msg-box"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>

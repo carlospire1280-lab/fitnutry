@@ -1,0 +1,26 @@
+FONDOS DEL SPLASH (pantalla de carga)
+======================================
+
+1. Copia aquí tus fotos (JPG, PNG, WEBP o GIF).
+   - El nombre del archivo da igual.
+   - Pesos recomendados: menos de 1-2 MB por foto
+     (se ven desenfocadas, no hace falta que sean grandes).
+
+2. Reinicia el servidor (serve.ps1) si estaba abierto,
+   o simplemente recarga la app — la lista se genera
+   sola en cada petición.
+
+3. Al abrir FitNutri se elegirá UNA foto al azar
+   como fondo del splash, con efecto desenfocado.
+
+4. Para quitar una foto, bórrala de esta carpeta.
+   Para volver al fondo de color, deja la carpeta vacía.
+
+
+PARA USAR SIN SERVIDOR (app movil / hosting estatico):
+- Ejecuta generar-listas.ps1 en la carpeta del proyecto
+  cada vez que agregues o quites fotos.
+- Luego sube TODA la carpeta del proyecto a un hosting
+  estatico (Netlify Drop, GitHub Pages, Vercel, etc.)
+  y abre la URL en el celular: se instala como app
+  desde el menu del navegador (Agregar a pantalla de inicio).

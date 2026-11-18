@@ -1,0 +1,20 @@
+{
+  "name": "FitNutri — Nutrición y Hábitos",
+  "short_name": "FitNutri",
+  "description": "App de nutrición, plan alimenticio, ejercicios y hábitos",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#16a34a",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Registrar comida", "url": "./index.html#comidas", "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }] },
+    { "name": "Mis hábitos", "url": "./index.html#habitos", "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }] },
+    { "name": "Ejercicios", "url": "./index.html#ejercicios", "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }] }
+  ]
+}

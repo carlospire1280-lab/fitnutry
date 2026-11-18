@@ -1,0 +1,27 @@
+FONDOS DE PANTALLA DE LA APP (wallpapers)
+==========================================
+
+1. Copia aquí tus imágenes (JPG, PNG, WEBP o GIF).
+   - El nombre del archivo da igual.
+   - Ideal: fotos horizontales o verticales con buena
+     luz; se verán con un velo oscuro encima para que
+     el texto se lea bien.
+
+2. Se muestra UNA foto al azar cada vez que abres la app,
+   de fondo en TODA la aplicación (no solo el splash).
+
+3. Para que se vea bien, activa un fondo de color en
+   Ajustes → Apariencia (o el modo oscuro). Con el tema
+   claro normal las fotos no se muestran.
+
+4. Para quitar una foto, bórrala de esta carpeta.
+   Carpeta vacía = fondo normal de la app.
+
+
+PARA USAR SIN SERVIDOR (app movil / hosting estatico):
+- Ejecuta generar-listas.ps1 en la carpeta del proyecto
+  cada vez que agregues o quites fotos.
+- Luego sube TODA la carpeta del proyecto a un hosting
+  estatico (Netlify Drop, GitHub Pages, Vercel, etc.)
+  y abre la URL en el celular: se instala como app
+  desde el menu del navegador (Agregar a pantalla de inicio).
