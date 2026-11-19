@@ -39,9 +39,9 @@ const MEALS = [
 // Claves: domingo, lunes, martes, miercoles, jueves, viernes, sabado
 // Cada ejercicio: { t: título, d: descripción, m: "X min" }
 const EXERCISES = {
-  lunes:     [{ t: "Cardio suave", d: "Caminata 30 min", m: "30 min" }, { t: "Fuerza", d: "Sentadillas, flexiones, plancha", m: "20 min" }],
+  lunes:     [{ t: "Glúteos + Cuádriceps + Core", d: "Marcha o trote suave", m: "2 minutos." }, { t: "Círculos de cadera", d: "10 repeticiones por lado", m: "2 minutos." }, { t: "Círculos de tobillo:", d: "10 repeticiones por lado.", m: "5 minutos." }, { t: "Sentadillas sin peso", d: "2 series × 10 repeticiones", m: "5 minutos." }, { t: "Puente de glúteos", d: "2 series × 12 repeticiones", m: "5 minutos." }, { t: "Caminata lateral con banda", d: "2 series × 10 pasos por lado", m: "5 minutos." }, { h: "Bloque de fuerza" }, { t: "Sentadilla", d: "3 × 8–12 repeticiones (descanso: 90 s). Cuando 12 repeticiones sean fáciles con técnica perfecta, añade dificultad.", m: "5 minutos." }, { t: "Sentadilla búlgara", d: "3 × 8–10 repeticiones por pierna (descanso: 90 s).", m: "5 minutos." }, { t: "Hip thrust / puente de glúteos: ", d: "3 × 12–15 repeticiones (descanso: 75 s). Lleva la última serie casi al fallo técnico.", m: "5 minutos." }, { t: "Caminata lateral con banda: ", d: "3 × 15–20 pasos por lado (descanso: 45 s). Lleva la última serie al fallo técnico.", m: "5 minutos." }, { t: "Elevaciones de pantorrilla", d: "• 3 × 15–20 repeticiones (descanso: 45 s).", m: "5 minutos." },{ h: "Bloque de core" }, { t: "Dead bug:", d: "3 × 8–12 repeticiones por lado.", m: "2 minutos." }, { t: "Plancha", d: "3 × 20–40 segundos (manteniendo la postura firme sin arquear la espalda).", m: "2 minutos." }, ],
   martes:    [{ t: "Cardio", d: "Correr o bicicleta 35 min", m: "35 min" }, { t: "Core", d: "Abdominales y plancha", m: "15 min" }],
-  miercoles: [{ t: "Descanso activo", d: "Yoga o estiramientos 25 min", m: "25 min" }],
+  miercoles: [{h: "Fuerza y accesorios" }, { t: "Remo con banda ", d: "3 × 10–15 repeticiones (descanso: 75 s).", m: "30 min" }, { t: " Remo invertido: ", d: "3 × 6–12 repeticiones en una superficie realmente estable. Si no tienes un lugar seguro, sustitúyelo por remo con banda (4 × 10–15 repeticiones).", m: "20 min" }, { t: "Flexiones: ", d: "3 × 6–12 repeticiones (pueden ser inclinadas si aún no salen bien). Deja 1–2 repeticiones en reserva", m: "20 min" }, { t: " Elevaciones laterales (con banda o mancuernas pequeñas): ", d: "3 × 12–20 repeticiones. Última serie cerca del fallo técnico.", m: "15 min" }, { t: "Curl de bíceps  ", d: "3 × 10–15 repeticiones ", m: "15 min" }, { t: "Extensión de tríceps con banda: :", d: "3 × 10–15 repeticiones .", m: "15 min" }, { t: "Pájaros / reverse fly: ", d: "3 × 12–20 repeticiones.", m: "15 min" }, { t: "Descanso en accesorios:", d: "Descanso en accesorios:", m: "15 min"},{h: "Bloque Final:"}, { t: "Movilidad y estiramiento: ", d: "•  10 minutos de movilidad de hombros y estiramiento suave de espalda/pecho.", m: "5 min" },  ],
   jueves:    [{ t: "Cardio", d: "Natación o baile 40 min", m: "40 min" }, { t: "Fuerza", d: "Peso: press, remo, sentadilla", m: "20 min" }],
   viernes:   [{ t: "HIIT", d: "Intervalos 20 min", m: "20 min" }, { t: "Movilidad", d: "Estiramientos", m: "10 min" }],
   sabado:    [{ t: "Deporte libre", d: "Fútbol, ciclismo o caminata larga", m: "60 min" }],
@@ -92,6 +92,63 @@ const ACHIEVEMENTS = [
   { id: "medidas", emoji: "📏", name: "Cuerpo medido", desc: "Registrar 3 medidas corporales" },
 ];
 
+// ===== Logros por hitos (se desbloquean acumulando) =====
+function achievementStats() {
+  const s = { days: 0, perfect: 0, water: 0, meals: 0, ex: 0, steps: 0, round: 0, entries: 0, kcal: 0 };
+  const habits = allHabits();
+  Object.keys(state.days).forEach(k => {
+    if (!k.startsWith(PK() + "|")) return;
+    const d = state.days[k];
+    const has = (d.habits && Object.keys(d.habits).length) || (d.entries && d.entries.length) || d.agua || d.steps ||
+      (d.meals && Object.keys(d.meals).length) || (d.ex && Object.keys(d.ex).length);
+    if (!has) return;
+    s.days++;
+    s.entries += (d.entries || []).length;
+    s.kcal += (d.entries || []).reduce((a, e) => a + (e.kcal || 0), 0);
+    const perf = habits.length > 0 && habits.every(h => d.habits[h.id]);
+    const mealsOk = MEALS.every(m => d.meals[m.id]);
+    const wat = d.agua >= aguaMeta();
+    if (perf) s.perfect++;
+    if (wat) s.water++;
+    if (mealsOk) s.meals++;
+    if (d.ex && Object.values(d.ex).some(Boolean)) s.ex++;
+    if ((d.steps || 0) >= 8000) s.steps++;
+    if (perf && wat && mealsOk) s.round++;
+  });
+  s.racha = state.racha || 0;
+  s.fasts = state.fastsDone || 0;
+  s.weights = weightsOf().length;
+  s.measures = measuresOf().length;
+  return s;
+}
+
+// [metrica, emoji, etiqueta, hitos]
+const MILESTONE_SPECS = [
+  ["perfect", "🌟", "días perfectos", [1, 2, 3, 5, 7, 10, 14, 21, 30, 45, 60, 90, 100, 120, 180, 365]],
+  ["racha", "🔥", "días de racha", [1, 2, 5, 10, 14, 21, 45, 60, 90, 100, 120, 180, 200, 365]],
+  ["water", "💧", "días con meta de agua", [3, 7, 14, 30, 60, 100, 180, 365]],
+  ["meals", "🍽️", "días registrando las 4 comidas", [3, 7, 14, 30, 60, 100, 180]],
+  ["ex", "🏋️", "días con ejercicio", [1, 3, 7, 14, 30, 60, 100, 180]],
+  ["steps", "👟", "días con 8,000+ pasos", [1, 3, 14, 30, 60, 100, 180, 365]],
+  ["fasts", "⏳", "ayunos completados", [3, 7, 14, 30, 60, 100]],
+  ["weights", "⚖️", "registros de peso", [1, 3, 10, 30, 50, 100]],
+  ["measures", "📏", "medidas corporales", [1, 5, 10, 20, 50]],
+  ["days", "📅", "días usando FitNutri", [7, 14, 30, 60, 100, 180, 365]],
+  ["entries", "📝", "alimentos registrados", [1, 5, 10, 25, 50, 100, 250, 500, 1000]],
+  ["kcal", "🔥", "kcal registradas (total)", [5000, 20000, 50000, 100000, 250000]],
+  ["round", "💎", "días redondos (todo completo)", [1, 7, 30, 100]],
+];
+const GENERATED_ACHIEVEMENTS = [];
+MILESTONE_SPECS.forEach(([key, emoji, label, nums]) => {
+  nums.forEach(n => GENERATED_ACHIEVEMENTS.push({
+    id: `g-${key}-${n}`,
+    emoji,
+    name: `${label} ×${n}`,
+    desc: `Acumular ${n} ${label}`,
+    test: s => s[key] >= n,
+  }));
+});
+const ALL_ACHIEVEMENTS = ACHIEVEMENTS.concat(GENERATED_ACHIEVEMENTS);
 // Meta de agua por defecto (configurable en Ajustes, en ml)
 const aguaMeta = () => state.waterGoal || 2000;
 
@@ -237,7 +294,10 @@ const MEASURE_FIELDS = [
 
 // ===== Estado =====
 const KEY = "fitnutri-v2";
-const today = new Date().toDateString();
+// "today" se refresca solo: si la app queda abierta pasada la medianoche,
+// D() y el intervalo mantienen la fecha actual sin recargar
+let today = new Date().toDateString();
+setInterval(() => { today = new Date().toDateString(); }, 30000);
 
 function freshDay() {
   return { date: today, meals: {}, habits: {}, ex: {}, agua: 0, entries: [], steps: 0, gym: {}, cheat: false, caffeine: 0, sugar: 0 };
@@ -307,11 +367,22 @@ state.lastKcalAdjust = state.lastKcalAdjust || {};
 state.wallpaper = state.wallpaper || null;
 Object.keys(state.days).forEach(k => { state.days[k] = normalizeDay(state.days[k]); });
 
-function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+let saveWarned = false;
+function save() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(state));
+  } catch {
+    if (!saveWarned) {
+      saveWarned = true;
+      alert("⚠️ No se pudieron guardar los datos (almacenamiento lleno). Exporta tus datos desde Ajustes > Datos.");
+    }
+  }
+}
 const $ = (s) => document.querySelector(s);
 const PK = () => state.activeProfile || "default";
 const arr = (map, k) => map[k] || (map[k] = []);
 const D = () => {
+  today = new Date().toDateString();
   const k = PK() + "|" + today;
   if (!state.days[k] || state.days[k].date !== today) state.days[k] = freshDay();
   const d = state.days[k];
@@ -369,7 +440,7 @@ function renderFoods() {
   $("#food-list").innerHTML = entries.map((e, i) => `
     <div class="item">
       <div>
-        <div class="item-title">${e.name}</div>
+        <div class="item-title">${esc(e.name)}</div>
         <div class="item-sub">${e.kcal} kcal${e.qty ? ` · ${e.qty} g` : ""}${e.p ? ` · ${e.p}g P` : ""}${e.c ? ` · ${e.c}g C` : ""}${e.f ? ` · ${e.f}g G` : ""}</div>
       </div>
       <div class="item-meta"><button class="ghost-btn" style="width:auto;margin:0;padding:6px 10px" data-del-food="${i}">✕</button></div>
@@ -386,6 +457,7 @@ function renderExercises() {
   const factor = [1, 1.15, 1.3, 0.9][w - 1];
   const ex = EXERCISES[todayName] || [];
   $("#exercise-list").innerHTML = ex.map((e, i) => {
+    if (e.h) return `<h2 class="ex-block">${e.h}</h2>`;
     const id = todayName + i;
     const mins = parseInt(e.m);
     const dispM = isNaN(mins) || /descanso/i.test(e.t) ? e.m : `${Math.round(mins * factor)} min`;
@@ -406,9 +478,9 @@ function renderHabits() {
   $("#habit-list").innerHTML = habits.map(h => `
     <div class="item ${D().habits[h.id] ? "done" : ""}">
       <span class="check" data-toggle="habit:${h.id}">${D().habits[h.id] ? "✓" : ""}</span>
-      <span class="emoji">${h.emoji}</span>
+      <span class="emoji">${esc(h.emoji)}</span>
       <div>
-        <div class="item-title">${h.title}${h.custom ? ` <button class="mini-del" data-del-habit="${h.id}" title="Eliminar">✕</button>` : ""}</div>
+        <div class="item-title">${esc(h.title)}${h.custom ? ` <button class="mini-del" data-del-habit="${h.id}" title="Eliminar">✕</button>` : ""}</div>
         <div class="item-sub">${h.sub}</div>
       </div>
     </div>`).join("");
@@ -463,19 +535,22 @@ function renderDashboard() {
 }
 
 // ===== Plan =====
+// Un perfil solo sirve para calcular plan si tiene edad, peso y altura válidos
+const planReady = (p) => !!(p && p.age > 0 && p.weight > 0 && p.height > 0);
 function renderPlanForm() {
   if (!state.profile) return;
   const p = state.profile;
-  $("#p-sex").value = p.sex;
-  $("#p-age").value = p.age;
-  $("#p-weight").value = p.weight;
-  $("#p-height").value = p.height;
-  $("#p-activity").value = p.activity;
-  $("#p-goal").value = p.goal;
+  $("#p-sex").value = p.sex ?? "";
+  $("#p-age").value = p.age ?? "";
+  $("#p-weight").value = p.weight ?? "";
+  $("#p-height").value = p.height ?? "";
+  $("#p-activity").value = p.activity ?? "";
+  $("#p-goal").value = p.goal ?? "";
 }
 
 function calcPlan() {
   const p = state.profile;
+  if (!planReady(p)) return;
   const bmr = Math.round(p.sex === "h"
     ? 10 * p.weight + 6.25 * p.height - 5 * p.age + 5
     : 10 * p.weight + 6.25 * p.height - 5 * p.age - 161);
@@ -509,7 +584,7 @@ function calcPlan() {
 // Ajuste automático semanal de kcal según tendencia de peso
 function maybeAdjustKcal() {
   const p = state.profile;
-  if (!p) return;
+  if (!planReady(p)) return;
   const ws = weightsOf().slice().sort((a, b) => new Date(a.date) - new Date(b.date));
   if (ws.length < 2) return;
   const lastAdj = state.lastKcalAdjust[PK()] || 0;
@@ -554,7 +629,7 @@ function renderList() {
     ? list.map((item, i) => `
       <div class="item ${item.done ? "done" : ""}">
         <span class="check" data-check-list="${i}">${item.done ? "✓" : ""}</span>
-        <div class="item-title">${item.name}</div>
+        <div class="item-title">${esc(item.name)}</div>
         <div class="item-meta"><button class="ghost-btn" style="width:auto;margin:0;padding:6px 10px" data-del-list="${i}">✕</button></div>
       </div>`).join("")
     : '<p class="hint">Lista vacía. Añade alimentos o genera desde tu plan.</p>';
@@ -642,8 +717,10 @@ function checkAchievements() {
     pasos7: stepDays >= 7,
     medidas: measuresOf().length >= 3,
   };
+  const st = achievementStats();
+  GENERATED_ACHIEVEMENTS.forEach(g => { if (g.test(st)) conds[g.id] = true; });
   let changed = false;
-  ACHIEVEMENTS.forEach(a => {
+  ALL_ACHIEVEMENTS.forEach(a => {
     if (conds[a.id] && !state.unlocked.includes(a.id)) {
       state.unlocked.push(a.id); changed = true;
     }
@@ -653,7 +730,7 @@ function checkAchievements() {
 
 function renderAchievements() {
   checkAchievements();
-  $("#achievements").innerHTML = ACHIEVEMENTS.map(a => {
+  $("#achievements").innerHTML = ALL_ACHIEVEMENTS.map(a => {
     const got = state.unlocked.includes(a.id);
     return `<div class="badge ${got ? "" : "locked"}"><span class="b-emoji">${a.emoji}</span><div><strong>${a.name}</strong><div style="font-size:.75rem;color:var(--muted)">${got ? "Desbloqueado ✓" : a.desc}</div></div></div>`;
   }).join("");
@@ -703,6 +780,12 @@ function resetTimer() {
 }
 
 // ===== Gimnasio (fuerza) =====
+// Registra el kg de hoy para un ejercicio sin duplicar entradas del mismo día
+function logGymKg(id, kg) {
+  const logs = gymLogOf();
+  const ex = logs.find(l => l.ex === id && l.date === today);
+  if (ex) ex.kg = kg; else logs.push({ date: today, ex: id, kg });
+}
 function gymPR(exId) {
   const kgs = gymLogOf().filter(l => l.ex === exId).map(l => l.kg).filter(k => k > 0);
   return kgs.length ? Math.max(...kgs) : 0;
@@ -888,8 +971,9 @@ function renderMenu() {
   }
   const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
   box.innerHTML = days.map((d, i) => {
-    const r = RECIPES.find(x => x.name === names[i]);
-    return `<div class="menu-day"><strong>${d}</strong> — ${names[i]}${r ? ` <span class="hint">${r.meta}</span>` : ""}</div>`;
+    const nm = names[i];
+    const r = nm && RECIPES.find(x => x.name === nm);
+    return `<div class="menu-day"><strong>${d}</strong> — ${nm || "—"}${r ? ` <span class="hint">${r.meta}</span>` : ""}</div>`;
   }).join("");
 }
 
@@ -929,6 +1013,17 @@ function renderPieCharts() {
   }), { p: 0, c: 0, f: 0 });
   const macroTot = t.p + t.c + t.f;
 
+  const habitsDone = habits.filter(h => D().habits[h.id]).length;
+  const mealsDone = MEALS.filter(m => D().meals[m.id]).length;
+  const dn = DAY_NAMES[new Date().getDay()];
+  const exToday = EXERCISES[dn] || [];
+  const exReal = exToday.filter(e => !e.h);
+  const exDone = exToday.filter((e, i) => !e.h && D().ex[dn + i]).length;
+  const exPct = exReal.length ? exDone / exReal.length * 100 : 0;
+  const todos = todosOf();
+  const todoDone = todos.filter(x => x.done).length;
+  const todoPct = todos.length ? todoDone / todos.length * 100 : 0;
+
   $("#pie-charts").innerHTML = `
     <div class="donut-row">
       ${donutCard(progPct, "var(--green)", "Progreso de hoy", `hábitos ${Math.round(habitsPct)}% · comidas ${Math.round(mealsPct)}% · agua ${Math.round(aguaPct)}%`)}
@@ -943,7 +1038,74 @@ function renderPieCharts() {
           <div class="hint" style="margin:2px 0 0">🥩 ${t.p.toFixed(0)}g · 🍞 ${t.c.toFixed(0)}g · 🥑 ${t.f.toFixed(0)}g</div>
         </div>
       </div>
+    </div>
+    <div class="donut-row" style="margin-top:16px">
+      ${donutCard(habitsPct, "#22c55e", "Hábitos hoy", `${habitsDone}/${habits.length} hechos`)}
+      ${donutCard(mealsPct, "#f59e0b", "Comidas", `${mealsDone}/${MEALS.length} registradas`)}
+      ${donutCard(exPct, "#8b5cf6", "Ejercicios hoy", exReal.length ? `${exDone}/${exReal.length}` : "día de descanso")}
+      ${donutCard(todoPct, "#0ea5e9", "Pendientes", todos.length ? `${todoDone}/${todos.length} listos` : "sin pendientes")}
     </div>`;
+}
+
+// ===== Resumen semanal y mensual =====
+function periodStats(daysBack) {
+  const habits = allHabits();
+  const now = new Date();
+  const s = { days: 0, perfect: 0, kcal: 0, water: 0, steps: 0 };
+  for (let i = 0; i < daysBack; i++) {
+    const d = new Date(now.getTime() - i * 864e5);
+    const day = state.days[PK() + "|" + d.toDateString()];
+    if (!day) continue;
+    const hasData = Object.keys(day.habits).length || day.entries.length || day.agua || (day.meals && Object.keys(day.meals).length) || day.steps;
+    if (!hasData) continue;
+    s.days++;
+    if (habits.length && habits.every(h => day.habits[h.id])) s.perfect++;
+    s.kcal += day.entries.reduce((a, e) => a + e.kcal, 0);
+    if (day.agua >= aguaMeta()) s.water++;
+    s.steps += day.steps || 0;
+  }
+  return s;
+}
+function renderPeriodStats() {
+  const box = $("#period-stats");
+  if (!box) return;
+  const w = periodStats(7);
+  const m = periodStats(30);
+  const cell = (big, lbl) => `<div class="week-stat"><span class="big">${big}</span><span class="lbl">${lbl}</span></div>`;
+  box.innerHTML =
+    cell(`${w.perfect}/7`, "días perfectos · semana") +
+    cell(w.kcal.toLocaleString("es"), "kcal · semana") +
+    cell(w.water, "días agua OK · semana") +
+    cell(`${m.perfect}`, "días perfectos · mes") +
+    cell(m.kcal.toLocaleString("es"), "kcal · mes") +
+    cell(m.water, "días agua OK · mes") +
+    cell(m.steps.toLocaleString("es"), "pasos · mes") +
+    cell(`${state.racha}🔥`, "racha actual");
+}
+
+// ===== Logros de hoy (se reinician cada día) =====
+const DAILY_ACHIEVEMENTS = [
+  { id: "d-agua", emoji: "💧", name: "Hidratación completa", desc: "Llegar a la meta de agua hoy", test: () => D().agua >= aguaMeta() },
+  { id: "d-habitos", emoji: "✅", name: "Todos los hábitos", desc: "Completar todos los hábitos hoy", test: () => { const h = allHabits(); return h.length > 0 && h.every(x => D().habits[x.id]); } },
+  { id: "d-comidas", emoji: "🍽️", name: "Las 4 comidas", desc: "Registrar todas las comidas hoy", test: () => MEALS.every(m => D().meals[m.id]) },
+  { id: "d-ejercicios", emoji: "🏋️", name: "Ejercicios hechos", desc: "Completar la rutina de hoy", test: () => { const dn = DAY_NAMES[new Date().getDay()]; const idxs = []; (EXERCISES[dn] || []).forEach((e, i) => { if (!e.h) idxs.push(i); }); return idxs.length > 0 && idxs.every(i => D().ex[dn + i]); } },
+  { id: "d-pasos", emoji: "👟", name: "8,000 pasos", desc: "Llegar a 8,000 pasos hoy", test: () => (D().steps || 0) >= 8000 },
+  { id: "d-peso", emoji: "⚖️", name: "Peso registrado", desc: "Registrar tu peso hoy", test: () => weightsOf().some(w => w.date === today) },
+  { id: "d-agua-mitad", emoji: "\u{1F95B}", name: "Medio litro de agua", desc: "Tomar la mitad de tu meta de agua", test: () => D().agua >= aguaMeta() / 2 },
+  { id: "d-agua-1l", emoji: "\u{1FAD7}", name: "Un litro de agua", desc: "Tomar 1,000 ml de agua hoy", test: () => D().agua >= 1000 },
+  { id: "d-entradas3", emoji: "\u{1F34E}", name: "3 alimentos", desc: "Registrar 3 alimentos hoy", test: () => (D().entries || []).length >= 3 },
+  { id: "d-pendientes", emoji: "\u{1F4CB}", name: "Pendientes limpios", desc: "Completar todos los pendientes de hoy", test: () => { const t = todosOf(); return t.length > 0 && t.every(x => x.done); } },
+  { id: "d-gym", emoji: "\u{1F4AA}", name: "Gym completo", desc: "Completar todos los ejercicios de gym hoy", test: () => { const g = Object.values(D().gym || {}); return g.length > 0 && g.every(Boolean); } },
+  { id: "d-sin-trampa", emoji: "\u{1F96C}", name: "Sin modo trampa", desc: "No activar modo trampa hoy", test: () => !D().cheat },
+];
+function renderDailyAchievements() {
+  const box = $("#daily-achievements");
+  if (!box) return;
+  box.innerHTML = DAILY_ACHIEVEMENTS.map(a => {
+    let got = false;
+    try { got = !!a.test(); } catch {}
+    return `<div class="badge ${got ? "" : "locked"}"><span class="b-emoji">${a.emoji}</span><div><strong>${a.name}</strong><div style="font-size:.75rem;color:var(--muted)">${got ? "¡Hoy sí! ✓" : a.desc}</div></div></div>`;
+  }).join("");
 }
 
 // ===== Render global =====
@@ -951,6 +1113,7 @@ function renderAll() {
   renderMeals(); renderFoods(); renderExercises(); renderHabits(); renderGym(); renderWeekStrip();
   renderDashboard(); renderRecipes(); renderList(); renderMenu(); renderTodos();
   renderWeights(); renderSteps(); renderKcalChart(); renderMacrosChart(); renderHeatmap(); renderMeasures(); renderPieCharts(); renderWeekSummary();
+  renderPeriodStats(); renderDailyAchievements();
   renderAchievements();
 }
 
@@ -981,7 +1144,7 @@ document.addEventListener("click", (e) => {
         const kgInput = document.querySelector(`[data-gym="${id}"]`);
         const kg = kgInput ? +kgInput.value || 0 : 0;
         D().gym[id] = { done: true, kg, alt: cur.alt || 0 };
-        if (kg > 0) gymLogOf().push({ date: today, ex: id, kg });
+        if (kg > 0) logGymKg(id, kg);
       }
       maybeCountMealsDay();
       save(); renderGym(); renderAll(); return;
@@ -1068,6 +1231,8 @@ document.querySelectorAll(".tab").forEach(tab => {
       $("#secret-pass").value = "";
       $("#secret-lock-msg").textContent = "";
     }
+    // Primera visita a esta pestaña → mostrar su introducción
+    setTimeout(() => showTabIntro(tab.dataset.tab), 400);
   });
 });
 
@@ -1153,18 +1318,11 @@ $("#barcode-btn").addEventListener("click", async () => {
 // Plan
 $("#plan-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  state.profile = {
-    sex: $("#p-sex").value,
-    age: +$("#p-age").value,
-    weight: +$("#p-weight").value,
-    height: +$("#p-height").value,
-    activity: +$("#p-activity").value,
-    goal: +$("#p-goal").value,
-  };
+  state.profile = profileFields();
   if (state.activeProfile && state.profiles[state.activeProfile]) {
     state.profiles[state.activeProfile] = { name: state.profiles[state.activeProfile].name, ...state.profile };
   }
-  save(); calcPlan(); renderDashboard();
+  save(); if (planReady(state.profile)) calcPlan(); renderDashboard();
 });
 
 // Lista
@@ -1207,7 +1365,7 @@ $("#weight-form").addEventListener("submit", (e) => {
   else ws.push({ date: today, kg });
   e.target.reset(); save(); renderWeights(); renderAchievements();
   maybeAdjustKcal();
-  if (state.profile) calcPlan();
+  if (planReady(state.profile)) calcPlan();
 });
 
 // Timer
@@ -1238,6 +1396,13 @@ $("#reset-btn").addEventListener("click", () => {
     localStorage.removeItem(KEY);
     location.reload();
   }
+});
+// Reiniciar las introducciones de cada pestaña
+$("#tours-reset").addEventListener("click", () => {
+  state.tours = {};
+  state.onboarded = false;
+  save();
+  alert("Listo. La próxima vez que abras la app verás las introducciones otra vez.");
 });
 
 // ===== Ayuno intermitente =====
@@ -1281,14 +1446,18 @@ setInterval(renderFasting, 30000);
 
 // ===== Perfiles =====
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function numOrNull(sel) {
+  const el = $(sel);
+  return el.value === "" ? null : +el.value;
+}
 function profileFields() {
   return {
     sex: $("#p-sex").value,
-    age: +$("#p-age").value,
-    weight: +$("#p-weight").value,
-    height: +$("#p-height").value,
-    activity: +$("#p-activity").value,
-    goal: +$("#p-goal").value,
+    age: numOrNull("#p-age"),
+    weight: numOrNull("#p-weight"),
+    height: numOrNull("#p-height"),
+    activity: numOrNull("#p-activity"),
+    goal: numOrNull("#p-goal"),
   };
 }
 function renderProfiles() {
@@ -1309,7 +1478,9 @@ $("#profile-form").addEventListener("submit", (e) => {
   delete f.name;
   state.profile = f;
   $("#p-name").value = "";
-  save(); renderProfiles(); renderPlanForm(); calcPlan(); renderDashboard();
+  save(); renderProfiles(); renderPlanForm();
+  if (planReady(state.profile)) calcPlan();
+  renderDashboard();
 });
 $("#profile-select").addEventListener("change", (e) => {
   const id = e.target.value;
@@ -1320,11 +1491,10 @@ $("#profile-select").addEventListener("change", (e) => {
     state.profile = f;
   } else {
     state.profile = null;
-    delete state.macros[PK()];
-    $("#plan-result").style.display = "none";
   }
+  $("#plan-result").style.display = "none";
   save(); renderPlanForm();
-  if (state.profile && macrosOf()) calcPlan();
+  if (planReady(state.profile) && macrosOf()) calcPlan();
   renderDashboard();
 });
 $("#profile-del").addEventListener("click", () => {
@@ -1340,11 +1510,10 @@ $("#profile-del").addEventListener("click", () => {
     state.profile = f;
   } else {
     state.profile = null;
-    delete state.macros[PK()];
-    $("#plan-result").style.display = "none";
   }
+  $("#plan-result").style.display = "none";
   save(); renderProfiles(); renderPlanForm();
-  if (state.profile && macrosOf()) calcPlan();
+  if (planReady(state.profile) && macrosOf()) calcPlan();
   renderDashboard();
 });
 
@@ -1478,10 +1647,23 @@ $("#menu-list").addEventListener("click", () => {
 });
 
 // ===== Timer de descanso (entre series) =====
-let restInt = null;
+let restInt = null, restAC = null;
+function restBeep() {
+  try {
+    restAC = restAC || new (window.AudioContext || window.webkitAudioContext)();
+    if (restAC.state === "suspended") restAC.resume();
+    const o = restAC.createOscillator(), g = restAC.createGain();
+    o.type = "sine"; o.frequency.value = 880;
+    g.gain.setValueAtTime(0.2, restAC.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, restAC.currentTime + 0.4);
+    o.connect(g); g.connect(restAC.destination);
+    o.start(); o.stop(restAC.currentTime + 0.4);
+  } catch {}
+}
 $("#rest-start").addEventListener("click", () => {
   const secs = +$("#rest-secs").value || 60;
   clearInterval(restInt);
+  try { restAC = restAC || new (window.AudioContext || window.webkitAudioContext)(); restAC.resume(); } catch {}
   let left = secs;
   $("#rest-display").textContent = left;
   restInt = setInterval(() => {
@@ -1489,7 +1671,7 @@ $("#rest-start").addEventListener("click", () => {
     if (left <= 0) {
       clearInterval(restInt);
       $("#rest-display").textContent = "¡Descansa! 💪";
-      try { new (window.AudioContext || window.webkitAudioContext)().resume(); } catch {}
+      restBeep();
       if ("Notification" in window && Notification.permission === "granted") {
         new Notification("FitNutri", { body: "Descanso terminado — ¡a la siguiente serie!" });
       }
@@ -1511,12 +1693,7 @@ document.addEventListener("change", (e) => {
   const id = inp.dataset.gym;
   const kg = +inp.value || 0;
   if (D().gym[id]) D().gym[id].kg = kg;
-  if (kg > 0) {
-    const logs = gymLogOf();
-    const existing = logs.find(l => l.ex === id && l.date === today);
-    if (existing) existing.kg = kg;
-    else logs.push({ date: today, ex: id, kg });
-  }
+  if (kg > 0) logGymKg(id, kg);
   save(); renderGym(); renderAchievements();
 });
 
@@ -1585,7 +1762,7 @@ function celebrate() {
 function maybeCelebrate() {
   const dn = DAY_NAMES[new Date().getDay()];
   const ex = EXERCISES[dn] || [];
-  if (ex.length && ex.every((_, i) => D().ex[dn + i]) && !D()._celebrated) {
+  if (ex.length && ex.every((e, i) => e.h || D().ex[dn + i]) && !D()._celebrated) {
     D()._celebrated = true;
     save(); celebrate();
   }
@@ -1797,7 +1974,7 @@ async function renderMusic() {
     <div class="item ${i === musicIdx ? "done" : ""}">
       <span class="check" data-play-song="${i}" style="cursor:pointer">${i === musicIdx ? "🎵" : "▶"}</span>
       <div style="flex:1">
-        <div class="item-title">${s.name.replace(/\.[^.]+$/, "")}</div>
+        <div class="item-title">${esc(s.name.replace(/\.[^.]+$/, ""))}</div>
         <div class="item-sub">${fmtSize(s.size)} · ${s.added || ""}</div>
       </div>
       <div class="item-meta"><button class="ghost-btn" style="width:auto;margin:0;padding:6px 10px" data-del-song="${i}">✕</button></div>
@@ -1823,15 +2000,36 @@ function pauseSong() {
   audio.pause();
   $("#np-play").textContent = "▶";
 }
-audio.addEventListener("ended", () => { if (musicIdx < musicList.length - 1) playSong(musicIdx + 1); else { musicIdx = -1; renderMusic(); } });
+// Siguiente canción: en aleatorio salta a una al azar; si no, sigue el orden
+let musicShuffle = false;
+function pickNext(autoEnd) {
+  if (!musicList.length) return;
+  if (musicShuffle) {
+    let i = Math.floor(Math.random() * musicList.length);
+    if (musicList.length > 1) while (i === musicIdx) i = Math.floor(Math.random() * musicList.length);
+    playSong(i);
+    return;
+  }
+  if (autoEnd) {
+    if (musicIdx < musicList.length - 1) playSong(musicIdx + 1);
+    else { musicIdx = -1; renderMusic(); }
+  } else {
+    playSong((musicIdx + 1) % musicList.length);
+  }
+}
+audio.addEventListener("ended", () => pickNext(true));
 audio.addEventListener("timeupdate", () => {
   if (audio.duration) $("#np-seek").value = Math.round(audio.currentTime / audio.duration * 1000);
 });
 audio.addEventListener("play", () => { $("#np-play").textContent = "⏸"; });
 audio.addEventListener("pause", () => { $("#np-play").textContent = "▶"; });
 $("#np-play").addEventListener("click", () => audio.paused ? audio.play() : audio.pause());
-$("#np-prev").addEventListener("click", () => playSong((musicIdx - 1 + musicList.length) % musicList.length));
-$("#np-next").addEventListener("click", () => playSong((musicIdx + 1) % musicList.length));
+$("#np-prev").addEventListener("click", () => playSong(musicIdx <= 0 ? musicList.length - 1 : musicIdx - 1));
+$("#np-next").addEventListener("click", () => pickNext(false));
+$("#np-shuffle").addEventListener("click", () => {
+  musicShuffle = !musicShuffle;
+  $("#np-shuffle").classList.toggle("tag-active", musicShuffle);
+});
 $("#np-seek").addEventListener("input", (e) => { if (audio.duration) audio.currentTime = (+e.target.value / 1000) * audio.duration; });
 $("#music-add").addEventListener("click", () => $("#music-input").click());
 $("#music-input").addEventListener("change", async (e) => {
@@ -1854,6 +2052,7 @@ document.addEventListener("click", (e) => {
 });
 
 state.onboarded = state.onboarded || false;
+state.tours = state.tours || {};
 
 // ===== Splash screen =====
 // Duración mínima en pantalla para que se pueda leer la dedicatoria.
@@ -1904,32 +2103,69 @@ setTimeout(() => $("#splash").classList.add("hide"), SPLASH_MS);
 
 // ===== Onboarding (primera vez) =====
 // ✏️ EDITABLE: Pantallas de bienvenida que salen la primera vez que se abre la app
+// Cada slide: { emoji, title, text } — opcional "img": "carpeta/archivo.gif" para usar imagen/GIF en vez del emoji
 const ONBOARD_SLIDES = [
-  { emoji: "🎯", title: "Bienvenida a FitNutri", text: "Tu compañero diario para comer mejor, moverme más y crear hábitos que sí se quedan." },
+  { emoji: "🎯", img: "gif%20para%20app.gif", title: "Bienvenida a FitNutri", text: "Tu compañero diario para comer mejor, moverme más y crear hábitos que sí se quedan." },
   { emoji: "✅", title: "Marca tu día", text: "Cada mañana verás tus comidas, ejercicios y hábitos. Márcalos al completarlos — es tan fácil como un toque." },
   { emoji: "📈", title: "Mira tu progreso", text: "Peso, calorías, rachas y logros se registran solos. Y hay una sección secreta 💌 solo para ti." },
 ];
-let obIdx = 0;
+
+// ✏️ EDITABLE: Introducción que sale la primera vez que se abre cada pestaña.
+// La clave debe coincidir con data-tab del botón en index.html.
+// Se muestra una sola vez por pestaña (se guarda en state.tours).
+const TAB_INTROS = {
+  dashboard: [{ emoji: "🏠", img: "anime-run-anime-run-fall.gif", title: "Tu día de un vistazo", text: "Aquí está tu resumen: hábitos, comidas, agua y kcal del día, más tu racha 🔥 y últimos logros. Es tu panel principal." }],
+  comidas: [{ emoji: "🍽️", img: "comida.gif", title: "Combustible del día", text: "Marca tus comidas planificadas, registra lo que comes con kcal y macros, controla tu agua y apunta cafeína/azúcar. El botón 📷 escanea códigos de barras." }],
+  ejercicios: [{ emoji: "🏋️", img: "pesas.gif", title: "Muévete y progresa", text: "Rutina según el día de la semana, fuerza con progresión por semanas y tus récords PR 🏆, timers de intervalos y descanso, y tu ayuno 16:8 si lo practicas." }],
+  habitos: [{ emoji: "✅", img: "lagartijas.gif", title: "Pequeños hábitos, grandes cambios", text: "Márcalos cada día para mantener tu racha 🔥. Puedes crear los tuyos y ver tu constancia en el mapa de calor de 12 semanas." }],
+  plan: [{ emoji: "🎯", img: "deal-with-it-trailblazer.gif", title: "Tu plan a medida", text: "Con tus datos (sexo, edad, peso, altura, actividad y objetivo) calculamos tus calorías y macros diarios. Si tu peso cambia, el objetivo se ajusta solo cada semana." }],
+  recetas: [{ emoji: "📖", img: "granny-dancing-game.gif", title: "Come rico y sano", text: "Recetas rápidas y altas en proteína. Puedes generar un menú semanal completo y mandar sus ingredientes a tu lista de compras con un toque." }],
+  lista: [{ emoji: "🛒", img: "baile.gif", title: "De compras sin olvidos", text: "Anota lo que necesitas y marca lo que ya compraste. El botón ✨ en Recetas puede llenar la lista sola desde tu menú semanal." }],
+  pendientes: [{ emoji: "📋", img: "brincos.gif", title: "No se te olvida nada", text: "Anota tus tareas y márcalas al completarlas. Las hechas se van al final de la lista para que no estorben." }],
+  progreso: [{ emoji: "📈", img: "pesas2.gif", title: "Mide tu avance", text: "Peso, medidas, pasos, calorías y macros en gráficas. Comparte tu progreso, expórtalo a CSV y desbloquea logros 🏅." }],
+  ajustes: [{ emoji: "⚙️", img: "on-miyao-wandance.gif", title: "Personaliza tu app", text: "Perfiles separados para cada quien, recordatorios, meta de agua, modo oscuro y fondos de pantalla. También puedes exportar o borrar tus datos." }],
+  secreto: [{ emoji: "💌", img: "naruto.gif", title: "Solo para ti", text: "Fotos de tu progreso, tu música guardada sin internet, tu historia semana a semana y un mensaje que se desbloquea con 7 días de hábitos." }],
+};
+
+let obIdx = 0, obSlides = ONBOARD_SLIDES, obTab = null;
 function renderOnboard() {
-  const s = ONBOARD_SLIDES[obIdx];
-  $("#ob-emoji").textContent = s.emoji;
+  const s = obSlides[obIdx];
+  const ob = $("#ob-emoji");
+  if (s.img) {
+    ob.innerHTML = `<img class="ob-gif" src="${s.img}" alt="" />`;
+  } else {
+    ob.textContent = s.emoji;
+  }
   $("#ob-title").textContent = s.title;
   $("#ob-text").textContent = s.text;
-  $("#ob-dots").innerHTML = ONBOARD_SLIDES.map((_, i) => `<span class="${i === obIdx ? "on" : ""}"></span>`).join("");
-  $("#ob-next").textContent = obIdx === ONBOARD_SLIDES.length - 1 ? "¡Empezar! 🎉" : "Siguiente →";
+  $("#ob-dots").innerHTML = obSlides.map((_, i) => `<span class="${i === obIdx ? "on" : ""}"></span>`).join("");
+  $("#ob-next").textContent = obTab ? "¡Entendido! ✓" : (obIdx === obSlides.length - 1 ? "¡Empezar! 🎉" : "Siguiente →");
+}
+// Muestra la introducción de una pestaña la primera vez que se abre
+function showTabIntro(tab) {
+  const slides = TAB_INTROS[tab];
+  if (!slides || state.tours[tab]) return;
+  obSlides = slides; obIdx = 0; obTab = tab;
+  renderOnboard();
+  $("#onboard").style.display = "flex";
 }
 function closeOnboard() {
-  state.onboarded = true;
+  if (obTab) {
+    state.tours[obTab] = true;
+    obTab = null; obSlides = ONBOARD_SLIDES; obIdx = 0;
+  } else {
+    state.onboarded = true;
+  }
   save();
   $("#onboard").style.display = "none";
 }
 $("#ob-next").addEventListener("click", () => {
-  if (obIdx < ONBOARD_SLIDES.length - 1) { obIdx++; renderOnboard(); }
+  if (obIdx < obSlides.length - 1) { obIdx++; renderOnboard(); }
   else closeOnboard();
 });
 $("#ob-skip").addEventListener("click", closeOnboard);
 if (!state.onboarded) {
-  setTimeout(() => { renderOnboard(); $("#onboard").style.display = "flex"; }, 1400);
+  setTimeout(() => { obSlides = ONBOARD_SLIDES; obIdx = 0; obTab = null; renderOnboard(); $("#onboard").style.display = "flex"; }, 1400);
 }
 
 // ===== Resumen semanal =====
@@ -1949,13 +2185,7 @@ function renderWeekSummary() {
   const ws = weightsOf();
   const cutoff = Date.now() - 7 * 864e5;
   const recent = ws.filter(w => new Date(w.date).getTime() >= cutoff);
-  let wDelta = "";
-  if (recent.length >= 1 && ws.length >= 2) {
-    const first = ws[0], last = ws[ws.length - 1];
-    if (new Date(first.date).getTime() >= cutoff - 864e5 || recent.length) {
-      wDelta = ` · ⚖️ ${last.kg} kg`;
-    }
-  }
+  const wDelta = recent.length ? ` · ⚖️ ${ws[ws.length - 1].kg} kg` : "";
   const goal = macrosOf() ? macrosOf().kcal : null;
   box.innerHTML = `
     <div class="week-stat"><span class="big">${perfect}/7</span><span class="lbl">días perfectos</span></div>
@@ -1972,9 +2202,10 @@ renderProfiles();
 renderFasting();
 renderCafSugar();
 $("#water-goal").value = state.waterGoal;
-if (state.profile && macrosOf()) calcPlan();
-maybeAdjustKcal();
-if (state.profile && macrosOf()) calcPlan();
+if (planReady(state.profile)) {
+  maybeAdjustKcal();
+  if (macrosOf()) calcPlan();
+}
 renderAll();
 resetTimer();
 checkAchievements();

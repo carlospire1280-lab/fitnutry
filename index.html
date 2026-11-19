@@ -57,7 +57,6 @@
       <button class="tab" data-tab="comidas">Comidas</button>
       <button class="tab" data-tab="ejercicios">Ejercicios</button>
       <button class="tab" data-tab="habitos">Hábitos</button>
-      <button class="tab" data-tab="plan">Plan</button>
       <button class="tab" data-tab="recetas">Recetas</button>
       <button class="tab" data-tab="lista">Lista</button>
       <button class="tab" data-tab="pendientes">📋</button>
@@ -332,6 +331,17 @@
       </div>
 
       <div class="panel-box">
+        <h2>📅 Esta semana y este mes</h2>
+        <div id="period-stats" class="week-summary"></div>
+      </div>
+
+      <div class="panel-box">
+        <h2>🎯 Logros de hoy</h2>
+        <p class="hint" style="margin:0 0 10px">Se reinician cada día — vuelve a ganarlos mañana.</p>
+        <div id="daily-achievements" class="badges"></div>
+      </div>
+
+      <div class="panel-box">
         <h2>🍩 Gráficas</h2>
         <div id="pie-charts" class="pie-charts"></div>
       </div>
@@ -425,6 +435,7 @@
         <h2>Datos</h2>
         <button id="export-btn" class="ghost-btn">⬇️ Exportar mis datos</button>
         <button id="reset-btn" class="ghost-btn danger">🗑️ Borrar todos los datos</button>
+        <button id="tours-reset" class="ghost-btn">🔁 Ver introducciones de nuevo</button>
       </div>
     </section>
 
@@ -462,6 +473,7 @@
               <button id="np-prev">⏮</button>
               <button id="np-play">▶</button>
               <button id="np-next">⏭</button>
+              <button id="np-shuffle" title="Reproducir en aleatorio">🔀</button>
             </div>
           </div>
           <div id="music-list"></div>
