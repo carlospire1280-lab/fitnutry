@@ -40,12 +40,12 @@ const MEALS = [
 // Cada ejercicio: { t: título, d: descripción, m: "X min" }
 const EXERCISES = {
   lunes:     [{ t: "Glúteos + Cuádriceps + Core", d: "Marcha o trote suave", m: "2 minutos." }, { t: "Círculos de cadera", d: "10 repeticiones por lado", m: "2 minutos." }, { t: "Círculos de tobillo:", d: "10 repeticiones por lado.", m: "5 minutos." }, { t: "Sentadillas sin peso", d: "2 series × 10 repeticiones", m: "5 minutos." }, { t: "Puente de glúteos", d: "2 series × 12 repeticiones", m: "5 minutos." }, { t: "Caminata lateral con banda", d: "2 series × 10 pasos por lado", m: "5 minutos." }, { h: "Bloque de fuerza" }, { t: "Sentadilla", d: "3 × 8–12 repeticiones (descanso: 90 s). Cuando 12 repeticiones sean fáciles con técnica perfecta, añade dificultad.", m: "5 minutos." }, { t: "Sentadilla búlgara", d: "3 × 8–10 repeticiones por pierna (descanso: 90 s).", m: "5 minutos." }, { t: "Hip thrust / puente de glúteos: ", d: "3 × 12–15 repeticiones (descanso: 75 s). Lleva la última serie casi al fallo técnico.", m: "5 minutos." }, { t: "Caminata lateral con banda: ", d: "3 × 15–20 pasos por lado (descanso: 45 s). Lleva la última serie al fallo técnico.", m: "5 minutos." }, { t: "Elevaciones de pantorrilla", d: "• 3 × 15–20 repeticiones (descanso: 45 s).", m: "5 minutos." },{ h: "Bloque de core" }, { t: "Dead bug:", d: "3 × 8–12 repeticiones por lado.", m: "2 minutos." }, { t: "Plancha", d: "3 × 20–40 segundos (manteniendo la postura firme sin arquear la espalda).", m: "2 minutos." }, ],
-  martes:    [{ t: "Cardio", d: "Correr o bicicleta 35 min", m: "35 min" }, { t: "Core", d: "Abdominales y plancha", m: "15 min" }],
-  miercoles: [{h: "Fuerza y accesorios" }, { t: "Remo con banda ", d: "3 × 10–15 repeticiones (descanso: 75 s).", m: "30 min" }, { t: " Remo invertido: ", d: "3 × 6–12 repeticiones en una superficie realmente estable. Si no tienes un lugar seguro, sustitúyelo por remo con banda (4 × 10–15 repeticiones).", m: "20 min" }, { t: "Flexiones: ", d: "3 × 6–12 repeticiones (pueden ser inclinadas si aún no salen bien). Deja 1–2 repeticiones en reserva", m: "20 min" }, { t: " Elevaciones laterales (con banda o mancuernas pequeñas): ", d: "3 × 12–20 repeticiones. Última serie cerca del fallo técnico.", m: "15 min" }, { t: "Curl de bíceps  ", d: "3 × 10–15 repeticiones ", m: "15 min" }, { t: "Extensión de tríceps con banda: :", d: "3 × 10–15 repeticiones .", m: "15 min" }, { t: "Pájaros / reverse fly: ", d: "3 × 12–20 repeticiones.", m: "15 min" }, { t: "Descanso en accesorios:", d: "Descanso en accesorios:", m: "15 min"},{h: "Bloque Final:"}, { t: "Movilidad y estiramiento: ", d: "•  10 minutos de movilidad de hombros y estiramiento suave de espalda/pecho.", m: "5 min" },  ],
-  jueves:    [{ t: "Cardio", d: "Natación o baile 40 min", m: "40 min" }, { t: "Fuerza", d: "Peso: press, remo, sentadilla", m: "20 min" }],
-  viernes:   [{ t: "HIIT", d: "Intervalos 20 min", m: "20 min" }, { t: "Movilidad", d: "Estiramientos", m: "10 min" }],
-  sabado:    [{ t: "Deporte libre", d: "Fútbol, ciclismo o caminata larga", m: "60 min" }],
-  domingo:   [{ t: "Descanso", d: "Paseo familiar + estiramientos", m: "20 min" }],
+  martes:    [{h: "Espalda" }, { t: "Remo con banda", d: "3 × 10–15 repeticiones (descanso: 75 s).", m: "—" }, { t: "Remo invertido", d: "3 × 6–12 repeticiones (solo con superficie estable; si no, remo con banda 4 × 10–15).", m: "—" }, {h: "Brazos y hombros" }, { t: "Flexiones", d: "3 × 6–12 repeticiones (inclinadas si hace falta, 1–2 en reserva).", m: "—" }, { t: "Elevaciones laterales", d: "3 × 12–20 repeticiones con banda o mancuernas (última serie cerca del fallo).", m: "—" }, { t: "Curl de bíceps", d: "3 × 10–15 repeticiones.", m: "—" }, { t: "Extensión de tríceps con banda", d: "3 × 10–15 repeticiones.", m: "—" }, { t: "Pájaros / reverse fly", d: "3 × 12–20 repeticiones.", m: "—" }, {h: "Bloque final" }, { t: "Movilidad", d: "10 min de movilidad de hombros y estiramiento suave de espalda/pecho. Descanso 45–60 s entre accesorios.", m: "10 min" }],
+  miercoles: [{h: "Fuerza — Glúteos y femorales" }, { t: "Peso muerto rumano", d: "3 × 10–12 repeticiones con mochila, mancuernas o banda (descanso: 90 s).", m: "—" }, { t: "Hip thrust", d: "3 × 10–15 repeticiones (descanso: 75–90 s).", m: "—" }, { t: "Zancada hacia atrás", d: "3 × 10 repeticiones por pierna (descanso: 75 s).", m: "—" }, { t: "Curl femoral con banda", d: "3 × 12–15 repeticiones (descanso: 60 s).", m: "—" }, { t: "Abducción de cadera con banda", d: "3 × 15–25 repeticiones (última serie al fallo técnico).", m: "—" }, {h: "Cardio" }, { t: "Cardio moderado", d: "15–20 min a ritmo que permita hablar entrecortadamente: caminar rápido, bailar, bicicleta, trote suave o cuerda.", m: "15–20 min" }],
+  jueves:    [{h: "Tren superior" }, { t: "Remo con banda (espalda)", d: "3 × 12–15 repeticiones.", m: "—" }, { t: "Pullover con banda", d: "3 × 10–15 repeticiones.", m: "—" }, { t: "Flexiones (pecho)", d: "3 × 6–12 repeticiones.", m: "—" }, { t: "Elevaciones laterales (hombros)", d: "3 × 15–20 repeticiones.", m: "—" }, { t: "Press de hombro", d: "2–3 × 8–12 repeticiones con mancuernas o banda.", m: "—" }, { t: "Curl de bíceps", d: "3 × 10–15 repeticiones.", m: "—" }, { t: "Tríceps con banda", d: "3 × 10–15 repeticiones.", m: "—" }, {h: "Core" }, { t: "Elevaciones de rodillas", d: "3 × 8–15 repeticiones.", m: "—" }, { t: "Plancha lateral", d: "3 × 20–40 segundos por lado.", m: "—" }, { t: "Bird dog", d: "2 × 10 repeticiones por lado.", m: "—" }],
+  viernes:   [{h: "Piernas y glúteos" }, { t: "Sentadilla", d: "3 × 10–12 repeticiones.", m: "—" }, { t: "Sentadilla búlgara", d: "3 × 8–12 repeticiones por pierna.", m: "—" }, { t: "Peso muerto rumano", d: "3 × 10–12 repeticiones.", m: "—" }, { t: "Hip thrust", d: "3 × 12–15 repeticiones.", m: "—" }, { t: "Abducción con banda", d: "3 × 20 repeticiones.", m: "—" }, { t: "Elevación de pantorrillas", d: "3 × 15–20 repeticiones.", m: "—" }, {h: "Potencia" }, { t: "Jump squats", d: "2 × 5–8 repeticiones explosivas y limpias; detente cuando baje la potencia.", m: "—" }],
+  sabado:    [{h: "Circuito — 3 rondas" }, { t: "Sentadilla", d: "12 repeticiones.", m: "—" }, { t: "Flexiones", d: "8–12 repeticiones.", m: "—" }, { t: "Remo con banda", d: "12 repeticiones.", m: "—" }, { t: "Zancada atrás", d: "10 repeticiones por pierna.", m: "—" }, { t: "Puente de glúteo", d: "15 repeticiones.", m: "—" }, { t: "Dead bug", d: "10 repeticiones por lado.", m: "—" }, { t: "Descansos", d: "20–30 s entre ejercicios · 2 min al terminar cada ronda.", m: "—" }, {h: "Movilidad y flexibilidad" }, { t: "Estiramiento", d: "25–30 min: isquiotibiales, caderas, aductores, glúteos, tobillos, hombros y espalda. Practica aperturas de pierna progresivas sin forzar.", m: "25–30 min" }],
+  domingo:   [{ t: "Descanso", d: "Descanso completo: sin entrenamiento ni compensar el día. Camina tranquilo y recupera — la recuperación construye músculo.", m: "—" }],
 };
 
 // ✏️ EDITABLE: Hábitos base que se muestran a todos los perfiles
@@ -67,6 +67,110 @@ const RECIPES = [
   { name: "Huevos revueltos proteicos", meta: "~320 kcal · 28g prot · 8 min", ing: ["3 huevos", "50g claras", "Espinacas, tomate", "Queso fresco"], steps: ["Bate huevos y claras.", "Saltea las verduras 3 min.", "Añade los huevos y cocina a fuego lento."] },
   { name: "Ensalada de garbanzos", meta: "~420 kcal · 18g prot · 10 min", ing: ["200g garbanzos cocidos", "Tomate, pepino, cebolla", "Huevo duro", "Vinagreta de oliva"], steps: ["Pica las verduras en cubos.", "Añade garbanzos y huevo.", "Aliña con vinagreta."] },
   { name: "Batido verde", meta: "~250 kcal · 12g prot · 5 min", ing: ["1 plátano", "Puñado de espinacas", "250ml bebida vegetal", "1 scoop proteína", "Semillas de chía"], steps: ["Pon todo en la licuadora.", "Tritura hasta homogeneizar."] },
+  // ===== Tanda 1 =====
+  { name: "Tortitas de avena y claras", meta: "~380 kcal · 30g prot · 10 min", ing: ["60g avena", "150ml claras de huevo", "1 plátano", "Canela", "100g yogur griego"], steps: ["Tritura avena, claras, plátano y canela hasta masa homogénea.", "Cocina porciones 1–2 min por lado en sartén antiadherente.", "Sirve con yogur encima."] },
+  { name: "Huevos revueltos con aguacate", meta: "~420 kcal · 30g prot · 10 min", ing: ["2 huevos", "100ml claras", "2 rebanadas pan integral", "½ aguacate", "Tomate y especias"], steps: ["Cuece huevos y claras a fuego medio removiendo.", "Tuesta el pan y monta con aguacate, tomate y huevos."] },
+  { name: "Bowl de yogur, avena y fruta", meta: "~320 kcal · 25g prot · 5 min", ing: ["250g yogur griego", "50g avena", "Fruta de temporada", "15g frutos secos", "Canela"], steps: ["Pon el yogur en un bol y añade la avena.", "Distribuye la fruta, frutos secos y canela."] },
+  { name: "Tostadas con requesón y plátano", meta: "~350 kcal · 25g prot · 5 min", ing: ["2 rebanadas pan integral", "150g requesón", "1 plátano pequeño", "Canela"], steps: ["Tuesta el pan.", "Reparte el requesón, añade plátano en rodajas y canela."] },
+  { name: "Batido de avena y frutos rojos", meta: "~380 kcal · 38g prot · 5 min", ing: ["250ml leche", "40g avena", "100g frutos rojos", "30g proteína en polvo", "1 plátano pequeño"], steps: ["Licúa todo hasta textura homogénea.", "Añade más leche si lo quieres más líquido."] },
+  { name: "Arroz integral con pollo", meta: "~600 kcal · 42g prot · 25 min", ing: ["80g arroz integral", "150g pechuga de pollo", "150–200g verduras", "Aceite de oliva", "Especias"], steps: ["Cuece el arroz según el envase.", "Saltea el pollo en dados con las verduras.", "Mezcla con el arroz y condimenta."] },
+  { name: "Pasta integral con atún", meta: "~550 kcal · 38g prot · 20 min", ing: ["90g pasta integral", "1 lata grande de atún", "150g tomate triturado", "Cebolla", "Aceite de oliva"], steps: ["Cuece la pasta.", "Sofríe la cebolla, añade el tomate y cocina unos minutos.", "Añade el atún escurrido y mezcla con la pasta."] },
+  { name: "Lentejas estofadas con arroz", meta: "~450 kcal · 22g prot · 30 min", ing: ["200g lentejas cocidas", "60g arroz", "Zanahoria, cebolla, pimiento, tomate", "Aceite de oliva"], steps: ["Sofríe las verduras troceadas.", "Añade lentejas y un poco de agua o caldo; cocina unos minutos.", "Sirve con el arroz cocido."] },
+  { name: "Bowl de quinoa, garbanzos y pollo", meta: "~580 kcal · 42g prot · 25 min", ing: ["70g quinoa", "100g garbanzos cocidos", "120g pechuga de pollo", "Tomate, pepino, zanahoria", "Aceite de oliva"], steps: ["Cuece la quinoa y deja templar.", "Cocina el pollo a la plancha y córtalo en tiras.", "Mezcla todo en un bol con aceite y especias."] },
+  { name: "Salmón al horno con patata", meta: "~620 kcal · 35g prot · 30 min", ing: ["150g salmón", "250g patata", "150g brócoli", "Limón", "Aceite de oliva"], steps: ["Hornea la patata hasta que empiece a estar tierna.", "Añade salmón y brócoli; hornea hasta que el pescado esté hecho.", "Sirve con limón y especias. Si el salmón está caro, cambia por merluza o tilapia."] },
+  // ===== Tanda 1 (cenas y snacks) =====
+  { name: "Wrap de pavo y verduras", meta: "~480 kcal · 38g prot · 15 min", ing: ["2 tortillas integrales", "150g pechuga de pavo", "Lechuga, tomate, zanahoria", "50g aguacate", "Yogur natural para salsa"], steps: ["Calienta las tortillas.", "Cocina el pavo a la plancha y córtalo en tiras.", "Mezcla el yogur con especias para la salsa.", "Rellena las tortillas con todo."] },
+  { name: "Tortilla de claras con espinacas", meta: "~320 kcal · 30g prot · 12 min", ing: ["1 huevo", "150ml claras", "100g espinacas", "60g queso fresco"], steps: ["Saltea las espinacas unos minutos.", "Añade huevo y claras batidas; cocina hasta cuajar.", "Incorpora el queso fresco antes de doblar."] },
+  { name: "Merluza al horno con verduras", meta: "~500 kcal · 38g prot · 30 min", ing: ["180g merluza", "Calabacín, pimiento, cebolla", "200g patata", "Aceite de oliva"], steps: ["Hornea primero las verduras y la patata.", "Añade la merluza y continúa hasta que esté hecha."] },
+  { name: "Ensalada de pollo, huevo y legumbres", meta: "~480 kcal · 38g prot · 15 min", ing: ["100g pollo", "1 huevo", "100g garbanzos cocidos", "Tomate, lechuga, pepino", "Aceite de oliva"], steps: ["Cocina el pollo a la plancha y el huevo hasta cuajar.", "Corta ambos y mezcla con garbanzos y verduras.", "Aliña al gusto."] },
+  { name: "Revuelto de tofu con verduras", meta: "~380 kcal · 27g prot · 15 min", ing: ["200g tofu firme", "Pimiento, cebolla, calabacín", "Cúrcuma y pimienta", "Aceite de oliva"], steps: ["Desmenuza el tofu con un tenedor.", "Saltea las verduras hasta que estén tiernas.", "Incorpora tofu y especias; cocina mezclando."] },
+  { name: "Crema de verduras con pollo", meta: "~480 kcal · 38g prot · 25 min", ing: ["150g pechuga de pollo", "200g calabacín", "100g patata", "Zanahoria, cebolla", "Aceite de oliva"], steps: ["Cuece las verduras y tritúralas hasta crema.", "Cocina el pollo a la plancha y sírvelo con la crema."] },
+  { name: "Yogur griego con frutos secos y miel", meta: "~280 kcal · 22g prot · 5 min", ing: ["250g yogur griego", "20g frutos secos", "10–15g miel"], steps: ["Sirve el yogur en un bol.", "Añade frutos secos troceados y la miel."] },
+  { name: "Tortitas de arroz con queso y pavo", meta: "~320 kcal · 28g prot · 5 min", ing: ["4 tortitas de arroz", "100g queso fresco", "80g pechuga de pavo"], steps: ["Reparte el queso fresco sobre las tortitas.", "Coloca el pavo encima."] },
+  { name: "Fruta con crema de cacahuete", meta: "~220 kcal · 9g prot · 3 min", ing: ["1 manzana o 1 plátano", "1–2 cucharadas de crema de cacahuete natural"], steps: ["Corta la fruta.", "Acompaña con la crema de cacahuete."] },
+  { name: "Huevo duro con fruta", meta: "~180 kcal · 13g prot · 12 min", ing: ["2 huevos", "1 pieza de fruta"], steps: ["Cuece los huevos 10–12 minutos.", "Enfría, pela y sirve con la fruta. Se pueden preparar con antelación."] },
+  // ===== Tanda 2 =====
+  { name: "Bowl de pasta con atún y guisantes", meta: "~520 kcal · 48g prot · 15 min · ~3$", ing: ["2 latas de atún escurrido", "300g pasta cocida", "75g guisantes congelados", "Aceite de oliva", "Zumo de limón"], steps: ["Cuece la pasta y añade los guisantes los últimos 2 minutos.", "Escurre y mezcla con aceite, atún y limón.", "Sazona al gusto. Rinde 2 raciones."] },
+  { name: "Salteado de muslos de pollo", meta: "~560 kcal · 45g prot · 20 min · ~4$", ing: ["225g muslos de pollo en cubos", "300g verduras congeladas", "2 cucharadas salsa de soja", "150g arroz cocido", "Aceite"], steps: ["Cocina el pollo en el aceite hasta que esté hecho.", "Añade verduras y salsa de soja; saltea todo.", "Sirve sobre el arroz."] },
+  { name: "Lentejas guisadas con verduras", meta: "~400 kcal · 17g prot · 40 min", ing: ["Lentejas secas", "Zanahoria, patata, cebolla, pimiento", "Espinacas", "Pimentón", "Caldo o agua"], steps: ["Sofríe cebolla, pimiento y zanahoria.", "Añade lentejas, pimentón, patata y caldo.", "Cuece 35–40 min hasta que estén tiernas. Rinde varias raciones."] },
+  { name: "Garbanzos salteados con espinacas", meta: "~380 kcal · 15g prot · 15 min", ing: ["Garbanzos cocidos escurridos", "Espinacas", "Ajo", "Pimentón", "Aceite de oliva"], steps: ["Saltea el ajo laminado, añade garbanzos y pimentón.", "Incorpora las espinacas hasta que reduzcan."] },
+  { name: "Muslos de pollo al horno con patatas", meta: "~600 kcal · 38g prot · 40 min", ing: ["Muslos de pollo económicos", "Patatas en cubos", "Guisantes congelados", "Aceite", "Sal, pimienta y especias"], steps: ["Coloca todo en una bandeja y condimenta.", "Hornea a 200°C hasta que el pollo esté dorado y las patatas tiernas."] },
+  { name: "Pasta al horno con atún", meta: "~540 kcal · 38g prot · 25 min", ing: ["Pasta cocida", "Atún escurrido", "Maíz dulce", "Tomate triturado", "Queso rallado"], steps: ["Mezcla la pasta con atún, maíz y tomate.", "Pon en fuente, cubre con queso y gratina hasta fundir."] },
+  { name: "Ensalada de garbanzos, atún y tomate", meta: "~420 kcal · 32g prot · 10 min", ing: ["Garbanzos cocidos", "1 lata de atún", "Tomate en cubos", "Cebolla", "Aceite de oliva y limón"], steps: ["Mezcla todo en un bol.", "Aliña justo antes de comer."] },
+  { name: "Ensalada de atún, huevo y garbanzos", meta: "~460 kcal · 32g prot · 15 min · <5$", ing: ["1 lata de atún", "2 huevos cocidos", "Lechuga, tomate", "½ aguacate", "½ taza garbanzos", "Aderezo: yogur + limón"], steps: ["Cuece los huevos 9–10 minutos, enfría y corta.", "Pon la lechuga de base y añade el resto.", "Mezcla yogur con limón y aliña al final."] },
+  { name: "Tinga de atún rápida", meta: "~400 kcal · 35g prot · 15 min", ing: ["Atún en lata", "Tomates", "Cebolla, ajo", "Chipotle al gusto", "Aceite"], steps: ["Licúa tomate, cebolla, ajo y chipotle.", "Cuece la salsa hasta que espese.", "Añade el atún y cocina 5 minutos más. Sirve con arroz o tostadas."] },
+  { name: "Hamburguesas de atún y papa", meta: "~380 kcal · 11g prot c/u · 20 min", ing: ["2 latas de atún", "2 papas hervidas", "2 huevos", "Cebollita de verdeo", "Pan rallado o avena", "Sal y pimienta"], steps: ["Mezcla todo hasta obtener masa moldeable.", "Forma hamburguesas y fríe 4–5 min por lado u hornea a 200°C 10–12 min. Rinde 6."] },
+  { name: "Pollo a la mostaza al horno", meta: "~580 kcal · 45g prot · 45 min · 4 porciones", ing: ["1 kg de pollo (muslo o pechuga)", "4 papas medianas", "3 cucharadas de mostaza", "2 cucharadas de aceite", "Sal y pimienta"], steps: ["Mezcla mostaza con aceite y cubre el pollo.", "Corta las papas y coloca todo en una fuente.", "Hornea a 200°C durante 45 minutos."] },
+  { name: "Curry de lentejas", meta: "~450 kcal · 18g prot · 35 min", ing: ["Lentejas", "Cebolla, ajo, tomate", "Curry en polvo", "Leche de coco o evaporada", "Arroz para acompañar"], steps: ["Sofríe cebolla y ajo, añade curry y tomate.", "Incorpora las lentejas y cubre con agua o caldo.", "Cuece hasta que estén tiernas. Sirve con arroz."] },
+  { name: "Pasta integral con lenteja roja", meta: "~520 kcal · 25g prot · 25 min", ing: ["Pasta integral", "Lenteja roja", "Salsa de tomate", "Cebolla, ajo", "Aceite de oliva"], steps: ["Sofríe cebolla y ajo, añade la salsa de tomate.", "Incorpora la lenteja roja y cocina hasta que espese.", "Mezcla con la pasta cocida."] },
+  { name: "Revuelto de huevos con arroz", meta: "~480 kcal · 25g prot · 12 min", ing: ["2–3 huevos", "Arroz integral cocido", "Salsa de soja", "Verduras"], steps: ["Saltea las verduras, añade arroz y soja.", "Incorpora los huevos batidos y remueve hasta cuajar."] },
+  { name: "Guiso de garbanzos con bacalao", meta: "~480 kcal · 35g prot · 40 min", ing: ["Garbanzos cocidos", "Espinacas", "Bacalao desalado o costilla económica", "Cebolla, ajo, pimentón", "Aceite"], steps: ["Sofríe cebolla y ajo, añade pimentón y garbanzos.", "Incorpora espinacas y el bacalao o carne.", "Deja cocinar hasta integrar. Rinde mucho."] },
+  { name: "Tortilla de dos huevos con espinaca", meta: "~250 kcal · 15g prot · 10 min · <1€", ing: ["2 huevos", "Espinacas frescas o congeladas", "Sal", "Aceite"], steps: ["Saltea las espinacas.", "Añade los huevos batidos y cuaja la tortilla."] },
+  { name: "Bol de arroz con pollo desmenuzado", meta: "~560 kcal · 40g prot · 15 min", ing: ["Arroz cocido", "Pollo desmenuzado (muslo)", "Verduras salteadas", "Especias"], steps: ["Mezcla el arroz con el pollo y las verduras.", "Ideal para meal prep: prepara el pollo en cantidad y congela porciones."] },
+  { name: "Ensalada templada de garbanzos", meta: "~420 kcal · 20g prot · 15 min", ing: ["Garbanzos cocidos", "Cebolla, tomate, pimiento", "2 huevos cocidos", "Aceite de oliva y vinagre"], steps: ["Saltea ligeramente las verduras y mezcla con garbanzos.", "Añade el huevo cocido en trozos y aliña."] },
+  { name: "Salteado de arroz con arvejas y huevo", meta: "~480 kcal · 22g prot · 12 min", ing: ["Arroz cocido", "Arvejas congeladas", "2 huevos", "Cebolla", "Salsa de soja"], steps: ["Saltea cebolla y arvejas, añade arroz y soja.", "Incorpora los huevos y remueve hasta cuajar."] },
+  { name: "Batch cooking de muslos especiados", meta: "~base para varias comidas", ing: ["Muslos o contramuslos sin piel", "Pimentón, ajo en polvo, comino, orégano", "Aceite"], steps: ["Mezcla las especias con el aceite y cubre el pollo.", "Ásalo al horno o cocínalo en sartén en grandes cantidades.", "Guarda en tuppers y combínalo con arroz, patata o ensalada."] },
+  // ===== Tanda 3 (41–60) =====
+  { name: "Rollos de apio con atún", meta: "~280 kcal · 32g prot · 10 min", ing: ["4 tallos de apio", "1 lata de atún", "2 cucharadas cebollín", "1 zanahoria rallada", "1 cucharada yogur (opcional)"], steps: ["Corta los apios en trozos de 5 cm.", "Mezcla el atún con cebollín, zanahoria y yogur.", "Rellena los tallos y guarda en frío."] },
+  { name: "\"Snickers\" de dátiles con proteína", meta: "~postre fit", ing: ["1½ tazas leche de avena", "2 cucharadas maicena", "¼ taza cacao", "½ taza pasta de dátiles", "Mantequilla de maní y cacahuates"], steps: ["Cuece la mezcla de la cubierta a fuego lento hasta que espese.", "Abre los dátiles, rellena con mantequilla de maní y cacahuates.", "Cubre con chocolate y congela 30 min."] },
+  { name: "Barritas de proteína de 3 ingredientes", meta: "~8-9g prot c/u", ing: ["1 taza soja texturizada", "½ taza mantequilla de cacahuete", "2-3 cucharadas cacao", "¼ taza leche vegetal"], steps: ["Tritura la soja hasta casi harina.", "Mezcla con cacao y mantequilla hasta masa densa.", "Compacta en molde, refrigera 1 hora y corta."] },
+  { name: "Batido de crema de cacahuete y plátano", meta: "~380 kcal · 18g prot · 5 min", ing: ["1 plátano maduro", "2 cucharadas crema de cacahuete", "200ml leche", "1 cucharada chía o lino"], steps: ["Licúa todo hasta homogeneizar.", "Añade hielo si lo quieres frío."] },
+  { name: "Batido de yogur y frutos rojos", meta: "~220 kcal · 16g prot · 5 min", ing: ["150g yogur griego", "100g frutos rojos congelados", "100ml agua o leche", "1 cucharada miel o dátil"], steps: ["Bate todo hasta que no queden trozos."] },
+  { name: "Tortilla dulce de plátano y huevo", meta: "~180 kcal · 8g prot · 10 min", ing: ["1 huevo", "1 plátano maduro", "Opcional: avena, edulcorante o chips"], steps: ["Pisa el plátano e incorpora el huevo.", "Cocina como tortilla vuelta y vuelta."] },
+  { name: "Sándwich proteico de huevo", meta: "~400 kcal · 19g prot · 12 min", ing: ["2 rebanadas pan integral", "2 huevos", "Yogur o mayonesa ligera", "Espinacas, tomate", "Opcional: aguacate o pavo"], steps: ["Cocina los huevos al gusto.", "Tuesta el pan y monta con rellenos.", "Cierra y corta por la mitad."] },
+  { name: "Tostadas proteicas de avena y queso", meta: "~13-15g prot · rinde 4 · horno", ing: ["100g avena", "2 huevos", "80g queso rallado", "1 cucharadita polvo de hornear", "Sal y especias"], steps: ["Precalienta a 180°C.", "Mezcla todo hasta masa homogénea.", "Forma tostadas y hornea 12–15 min hasta dorar."] },
+  { name: "Corteza proteica de chocolate y cacahuete", meta: "~10g prot c/u", ing: ["½ taza harina de almendra", "½ taza proteína vainilla", "¼ taza mantequilla de maní", "8-10 cucharaditas leche de almendras", "¼ taza jarabe de arce", "3 cucharadas chocolate negro"], steps: ["Mezcla mantequilla, leche y sirope.", "Añade almendra y proteína hasta masa.", "Extiende en molde, cubre con chocolate y congela 10 min."] },
+  { name: "Muffins de huevo y verduras", meta: "~9g prot c/u · rinde varios", ing: ["4 huevos", "½ taza espinacas picadas", "½ taza pimiento o calabacín", "Sal y pimienta", "Opcional: queso rallado"], steps: ["Precalienta a 180°C.", "Bate los huevos con las verduras.", "Reparte en molde de muffins y hornea 15–20 min."] },
+  { name: "Licuado de avena y café", meta: "~9g prot · 5 min", ing: ["1 taza leche", "½ taza avena", "1 cucharada café soluble", "Endulzante", "Canela"], steps: ["Licúa todo hasta integrar la avena.", "Sirve frío o con hielo."] },
+  { name: "Barritas crujientes de proteína", meta: "~14g prot c/u · sin horno", ing: ["1 taza chips de chocolate negro", "2 cucharaditas aceite de coco", "2 tazas bocaditos de proteína de soja", "¼ taza mantequilla de cacahuete"], steps: ["Derrite el chocolate con el aceite.", "Mezcla con bocaditos y mantequilla.", "Extiende en molde y refrigera hasta solidificar."] },
+  { name: "Batido de chocolate y plátano", meta: "~12g prot · 5 min", ing: ["1 plátano", "200ml leche o yogur", "1 cucharada cacao puro", "Opcional: proteína o leche en polvo"], steps: ["Bate todo hasta crema homogénea."] },
+  { name: "Yogur griego con avena y canela", meta: "~22g prot · 5 min", ing: ["250g yogur griego", "40g avena", "Canela"], steps: ["Mezcla el yogur con la avena.", "Espolvorea canela. Deja reposar para que la avena se ablande."] },
+  { name: "Batido de avena, cacao y plátano", meta: "~13g prot · alto en kcal · 5 min", ing: ["1 plátano", "40g avena", "1 cucharada cacao puro", "250ml leche", "Hielo"], steps: ["Licúa todo hasta textura cremosa.", "Añade más leche si queda espeso."] },
+  { name: "Muffins proteicos de plátano y avena", meta: "~7g prot c/u · batch cooking", ing: ["2 plátanos maduros", "2 huevos", "1 taza avena", "1 cucharadita polvo de hornear", "Opcional: proteína o miel"], steps: ["Machaca los plátanos y mezcla con los huevos.", "Añade avena e impulsor.", "Hornea en molde de muffins a 180°C, 15–20 min."] },
+  { name: "Licuado de leche en polvo, avena y plátano", meta: "~16g prot · sin suplementos · 5 min", ing: ["2 cucharadas leche en polvo", "3 cucharadas avena", "1 plátano", "250ml agua o leche"], steps: ["Bate todo hasta integrar. La leche en polvo sube la proteína barato."] },
+  { name: "Revuelto de claras con espinaca y champiñones", meta: "~27g prot · bajo en carbos · 10 min", ing: ["150ml claras (o 3 claras)", "1 huevo entero", "100g espinacas", "½ taza champiñones", "Sal, pimienta, aceite"], steps: ["Saltea champiñones y espinacas.", "Añade claras y huevo batidos; remueve hasta cuajar."] },
+  // ===== Tanda 4 (61–80) =====
+  { name: "Chili de lentejas y pavo", meta: "~52g prot · ~3.5$ · rinde 4", ing: ["225g carne picada de pavo", "200g lentejas secas", "1 lata tomate troceado", "2 cucharadas chile en polvo", "1 litro agua o caldo"], steps: ["Dora el pavo.", "Añade lentejas, tomate, agua y especias.", "Cuece a fuego lento 25–30 min hasta que estén tiernas."] },
+  { name: "Burrito de huevo y frijoles", meta: "~32g prot · ~2$ · 10 min", ing: ["3 huevos revueltos", "90g frijoles negros", "1 tortilla grande", "2 cucharadas salsa", "30g queso"], steps: ["Revuelve los huevos y calienta los frijoles.", "Coloca todo en capas en la tortilla y enróllala.", "Opcional: dora el exterior en plancha."] },
+  { name: "Ternera con arroz", meta: "~40g prot · ~4.5$ · 20 min", ing: ["170g carne picada de ternera", "150g arroz cocido", "150g verduras congeladas", "Salsa de soja", "Ajo y cebolla en polvo"], steps: ["Dora la carne y escurre la grasa si hace falta.", "Añade verduras y condimentos.", "Sirve sobre el arroz."] },
+  { name: "Avena proteica de la noche anterior", meta: "~30g prot · ~1.5$ · prep nocturna", ing: ["50g copos de avena", "240ml leche", "120g yogur griego", "Opcional: proteína en polvo", "Fruta"], steps: ["Mezcla avena, leche, yogur y proteína en un tarro.", "Refrigera toda la noche y añade fruta por la mañana."] },
+  { name: "Aguacate relleno de atún", meta: "~35g prot · ~4$ · 10 min", ing: ["2 latas de atún", "1 aguacate maduro", "2 cucharadas yogur griego", "Zumo de limón", "Sal, pimienta, eneldo"], steps: ["Mezcla el atún con yogur, limón y condimentos.", "Rellena las mitades de aguacate."] },
+  { name: "Tortitas proteicas de requesón", meta: "~38g prot · ~2.5$ · rinde 4", ing: ["225g requesón", "2 huevos", "50g copos de avena", "½ cucharadita canela", "Sirope opcional"], steps: ["Tritura todo menos el sirope.", "Cocina como tortitas a fuego medio. Salen unas 4."] },
+  { name: "Hamburguesas de lentejas y carne", meta: "~proteína mixta · económico", ing: ["250g carne picada magra", "1 taza lentejas cocidas", "1 cebolla", "Ajo, condimentos", "Pan rallado o avena"], steps: ["Procesa las lentejas con la cebolla y mezcla con la carne.", "Forma hamburguesas y cocina al horno o plancha."] },
+  { name: "Tacos de garbanzos y huevo", meta: "~25g prot · rápido", ing: ["2 tortillas integrales", "1 taza garbanzos cocidos", "2 huevos", "Tomate, cebolla", "Queso untable o palta"], steps: ["Saltea los garbanzos con especias hasta dorar.", "Haz huevos revueltos aparte.", "Calienta las tortillas y rellena."] },
+  { name: "Omelette de huevos con queso y espinaca", meta: "~28g prot · 10 min", ing: ["3 huevos", "Espinaca", "50g queso", "Sal, pimienta", "Aceite de oliva"], steps: ["Bate los huevos.", "Agrega espinaca salteada y queso en cubos.", "Cuece en sartén hasta dorar por ambos lados."] },
+  { name: "Huevos revueltos con tomate y avena", meta: "~15g prot · desayuno rápido", ing: ["2 huevos", "1 tomate pequeño", "1 cucharada avena", "Cebolla picada", "Sal y orégano"], steps: ["Bate los huevos con tomate, avena y cebolla.", "Cuece en sartén removiendo hasta cuajar."] },
+  { name: "Tortilla de huevo con papa rallada", meta: "~15g prot · económica", ing: ["2 huevos", "½ papa rallada", "1 cucharadita aceite", "Sal", "Cúrcuma"], steps: ["Mezcla huevos batidos con la papa y cúrcuma.", "Cuece como tortilla vuelta y vuelta."] },
+  { name: "Bowl de huevo cocido con aguacate y atún", meta: "~30g prot · cena rápida", ing: ["2 huevos cocidos", "½ aguacate", "2 cucharadas atún", "Limón", "Sal y pimienta"], steps: ["Cuece los huevos 9–10 min, enfría y corta.", "Mezcla con aguacate y atún; aliña con limón."] },
+  { name: "Pan de pollo y queso en licuadora", meta: "~40g prot · sin harinas · horno", ing: ["500g pechuga de pollo cruda", "3 huevos", "100g queso crema o rallado", "1 cucharadita polvo de hornear", "Sal, orégano, provenzal"], steps: ["Licúa el pollo con huevos y queso hasta pasta.", "Añade polvo y condimentos.", "Hornea a temperatura media 30–35 min hasta que salga limpio al pinchar."] },
+  { name: "Nuggets caseros de pollo", meta: "~proteína · rinde varias comidas", ing: ["1.2kg supremas de pollo", "3 cucharadas yogur", "500g cereales triturados", "Pimienta, ajo en polvo, sal"], steps: ["Procesa el pollo en pasta y condimenta.", "Incorpora el yogur y forma nuggets.", "Pasa por cereales y cocina en freidora 20 min a 170°C u horno 30 min a 180°C."] },
+  { name: "Pollo a la mostaza al horno con papas", meta: "~45g prot · 4 porciones · 45 min", ing: ["1 kg pollo (muslo o pechuga)", "4 papas medianas", "3 cucharadas mostaza", "2 cucharadas aceite", "Sal y pimienta"], steps: ["Mezcla mostaza con aceite y cubre el pollo.", "Corta las papas y coloca todo en fuente.", "Hornea a 200°C durante 45 minutos."] },
+  { name: "Pollo a la parrilla con quinoa y vegetales", meta: "~40g prot · 25 min", ing: ["250g pechuga de pollo", "1 taza quinoa cocida", "Brócoli, 2 zanahorias", "Aceite de oliva", "Ajo, limón, curry, sal, pimienta"], steps: ["Cocina el pollo en tiras con aceite y especias.", "Añade la quinoa y mezcla.", "Cuece el brócoli y las zanahorias aparte; emplata con limón."] },
+  { name: "Tinga de atún rápida", meta: "~35g prot · 15 min", ing: ["Atún en lata", "Tomates", "Cebolla, ajo", "Chipotle", "Aceite"], steps: ["Licúa tomate, cebolla, ajo y chipotle.", "Cuece la salsa hasta que espese.", "Añade el atún y cocina 5 min más. Sirve con arroz o tostadas."] },
+  { name: "Ensalada de atún, huevo y vegetales", meta: "~30g prot · <5$ · 15 min", ing: ["1 lata atún", "2 huevos cocidos", "Lechuga, tomate", "½ aguacate", "Garbanzos opcional", "Aderezo: yogur + limón"], steps: ["Cuece los huevos, enfría y corta en cubos.", "Pon la lechuga de base y añade el resto.", "Aliña con la mezcla de yogur y limón."] },
+  { name: "Alubias con arroz veganas", meta: "~27g prot · 4 raciones", ing: ["500g alubias", "Arroz", "2 hojas de laurel", "Aceite de oliva", "4 dientes de ajo", "Pimentón ahumado", "Perejil, hierbabuena, sal"], steps: ["Remoja las alubias la noche anterior.", "Cuécelas con laurel hasta tiernas.", "Haz sofrito de ajo y pimentón; mezcla con alubias y arroz."] },
+  { name: "Estofado de lentejas", meta: "~21g prot · 4 raciones · se conserva 4 días", ing: ["300g lentejas secas", "Aceite de oliva", "Cebolla, zanahoria, pimiento rojo", "Ajo", "Tomate triturado y puré", "Pimentón, comino, laurel", "900ml agua o caldo", "Vinagre, sal, perejil"], steps: ["Sofríe las verduras.", "Añade ajo, especias, tomate, lentejas, laurel y agua.", "Cuece 25–30 min hasta que estén tiernas."] },
+  // ===== Tanda 5 (81–100) =====
+  { name: "Batido para ganar masa", meta: "~870 kcal · 52g prot · ~1.6$", ing: ["200ml leche entera", "1 plátano", "40g crema de cacahuate", "50g avena", "30g proteína o leche en polvo"], steps: ["Licúa todo hasta homogeneizar.", "Añade más leche si queda espeso."] },
+  { name: "Panecillos proteicos en sartén", meta: "~5 min · ~1.8€/ración", ing: ["4 huevos", "100g harina de avena", "50g copos de avena", "Nueces picadas", "Aceite"], steps: ["Mezcla los huevos con la harina de avena.", "Pon un molde en sartén con aceite, añade nueces y copos.", "Vierte la mezcla, cocina 1 min, voltea y cocina 1 min más."] },
+  { name: "Paneer Bhurji (requesón con vegetales)", meta: "~desayuno/cena vegetariana", ing: ["200g requesón desmenuzado", "½ cebolla, 1 tomate, ½ pimiento", "Jengibre y ajo", "Cúrcuma, comino, cilantro"], steps: ["Sofríe cebolla, jengibre y ajo.", "Añade tomate y pimiento hasta ablandar.", "Incorpora el requesón y las especias; cocina removiendo."] },
+  { name: "Chana Masala con avena", meta: "~plato único económico", ing: ["1 taza garbanzos cocidos", "½ taza avena", "1 tomate triturado", "Cebolla, ajo, jengibre", "Garam masala, cúrcuma, comino", "Caldo o agua"], steps: ["Sofríe cebolla con ajo y jengibre.", "Añade tomate y especias.", "Incorpora garbanzos y avena con un poco de caldo; cuece 10–15 min."] },
+  { name: "Empanadas proteicas de soja", meta: "~proteína vegetal · rinde varias", ing: ["1 taza soja texturizada", "2 tazas agua caliente", "Cebolla, morrón, ajo", "Puré de tomate", "Pimentón, comino, sal", "12 tapas de empanada"], steps: ["Hidrata la soja 10–15 min, escúrrela y presiónala.", "Prepara sofrito con cebolla, morrón y ajo.", "Añade soja, puré y especias; cocina 10 min.", "Rellena las tapas y hornea o fríe."] },
+  { name: "Licuado de avena, maní y dátiles", meta: "~post-entreno · sin suplementos", ing: ["1 taza leche", "3 cucharadas avena", "1 cucharada mantequilla de maní", "2 dátiles", "1 cucharadita chía"], steps: ["Licúa todo hasta cremoso.", "Añade hielo al gusto."] },
+  { name: "Barritas de proteína sin horno", meta: "~8 barritas", ing: ["1 taza avena", "½ taza mantequilla de maní", "¼ taza proteína o leche en polvo", "2 cucharadas miel", "2 cucharadas chips de chocolate"], steps: ["Mezcla todo hasta masa compacta.", "Extiende en molde y refrigera 1 hora.", "Corta en 8 barritas."] },
+  { name: "Lentejas con pollo", meta: "~550 kcal · 45g prot · 30 min", ing: ["1 taza lentejas cocidas", "150g pollo (muslo)", "Zanahoria, cebolla, pimiento", "Especias", "Aceite"], steps: ["Cocina el pollo con las verduras.", "Añade lentejas y un poco de agua o caldo.", "Cuece hasta integrar todo."] },
+  { name: "Gachas proteicas clásicas", meta: "~32g prot · 58g carbos · 5 min", ing: ["50g avena", "250ml leche", "1 cacito proteína vainilla", "1 plátano", "Canela"], steps: ["Cocina la avena con la leche 2–3 min.", "Añade la proteína y mezcla.", "Decora con plátano y canela."] },
+  { name: "Gachas con claras de huevo", meta: "~35g prot · 4g grasa · económica", ing: ["50g avena", "200ml agua", "100ml claras de huevo", "1 manzana", "Canela"], steps: ["Cuece la avena en el agua 3–4 min.", "Añade las claras y remueve 1–2 min más.", "Mezcla con la manzana y canela."] },
+  { name: "Pan proteico en sartén", meta: "~4 min · desayuno pre-entreno", ing: ["1 huevo", "3 cucharadas avena", "1 cucharada yogur griego", "½ cucharadita polvo de hornear", "Sal, aceite"], steps: ["Bate huevo con avena, yogur, sal y polvo.", "Vierte en sartén engrasada, tapa y cocina 2 min.", "Voltea y cocina 2 min más."] },
+  { name: "Batido de plátano y cacao", meta: "~post-entreno · sin azúcar", ing: ["200ml leche", "½ plátano", "1 cucharada cacao puro", "Proteína o leche en polvo"], steps: ["Bate todo hasta homogeneizar."] },
+  { name: "Batido de frutos rojos y avena", meta: "~saciante · económico", ing: ["200ml leche", "Frutos rojos", "2 cucharadas avena", "Proteína o yogur griego"], steps: ["Licúa todo hasta textura suave."] },
+  { name: "Batido de café proteico", meta: "~mañanas / pre-entreno", ing: ["Café frío", "200ml leche", "1 cacito proteína", "Hielo"], steps: ["Bate café con leche, proteína y hielo hasta espumar."] },
+  { name: "Batido verde proteico", meta: "~micronutrientes · 5 min", ing: ["200ml bebida vegetal", "1 cacito proteína", "½ plátano", "Espinacas", "½ manzana"], steps: ["Licúa todo hasta que no queden trozos de espinaca."] },
+  { name: "Sándwich proteico de huevo y jamón", meta: "~desayuno completo", ing: ["2 rebanadas pan integral", "1 huevo", "2-3 fetas jamón magro", "1 zanahoria rallada", "½ chile (opcional)", "Sal, pimienta"], steps: ["Cocina el huevo revuelto o tortilla baja.", "Tuesta el pan y monta con todo.", "Cierra el sándwich."] },
+  { name: "Panes proteicos sin harinas", meta: "~sin refinados · horno", ing: ["5 huevos", "2 tazas leche en polvo", "1 cucharada polvo de hornear", "Sal"], steps: ["Bate los huevos con la leche en polvo, polvo y sal.", "Reparte en molde de panecillos.", "Hornea a 180°C hasta dorados y firmes."] },
+  { name: "Crepes proteicas con yogur", meta: "~desayuno/merienda · se guardan", ing: ["45g harina", "75g claras de huevo", "40ml leche", "200g yogur griego", "20g proteína cacao"], steps: ["Mezcla harina, claras y leche en masa líquida.", "Cuece crepes finas en sartén.", "Rellena con yogur y proteína."] },
+  { name: "Hot cakes de plátano y avena", meta: "~dulce sin harinas · económico", ing: ["2 plátanos maduros", "2 huevos", "1 scoop proteína o leche en polvo", "½ taza avena molida", "Polvo de hornear, canela"], steps: ["Tritura plátanos con huevos.", "Añade proteína, avena, polvo y canela.", "Cuece porciones hasta que salgan burbujas y voltea."] },
+  { name: "Arroz frito con huevo y verdura", meta: "~aprovechamiento · 12 min", ing: ["Arroz cocido del día anterior", "2 huevos", "Guisantes congelados", "Verduras al gusto", "Salsa de soja", "Aceite"], steps: ["Saltea las verduras con aceite.", "Añade arroz y salsa de soja.", "Incorpora los huevos batidos y remueve hasta cuajar."] },
 ];
 
 // ✏️ EDITABLE: Alimentos que se añaden con el botón "Generar desde mi plan"
@@ -270,9 +374,38 @@ function nextGymDay() {
   return "";
 }
 
-// ✏️ EDITABLE: mensaje secreto — se desbloquea al completar SECRET_UNLOCK_DAYS días de hábitos
+// ✏️ EDITABLE: mensajes secretos — se desbloquean al completar SECRET_UNLOCK_DAYS
+// días de hábitos. Cada semana se muestra UNO distinto al azar.
 const SECRET_UNLOCK_DAYS = 7;
-const SECRET_MSG = "Cada día que completas es una prueba de que puedes. Estoy orgulloso de ti. 💚";
+const SECRET_MSGS = [
+  "Cada día que te levantas a cuidarte me enamora un poco más. Estoy orgulloso de ti. 💚",
+  "No sabes lo que significa verte esforzarte por ti misma. Te admiro más de lo que imaginas. ✨",
+  "Cuando dices 'hoy no puedo', yo sé que sí puedes — y eso me enamora de ti. 💛",
+  "Tu constancia no pasa desapercibida. Cada gota de sudor es una prueba de tu amor propio. 🌱",
+  "Me enamora la versión de ti que no se rinde, aunque el día esté difícil. 🤍",
+  "Llevar tu cuerpo hasta aquí no es fácil, y aun así lo haces. Eso es lo más sexy que existe. 💚",
+  "Si me preguntaran qué me enamora de ti, diría: tu disciplina silenciosa. 🔥",
+  "Cada hábito que cumples es una carta de amor que te escribes a ti misma. Yo solo la leo. 💌",
+  "Eres la persona que siempre quise animar sin saberlo. Y ahora puedo hacerlo desde aquí. ✨",
+  "Tu progreso no es solo físico — es la prueba de que te eliges a ti primero. Y eso me enamora. 🌸",
+  "Hay días que creo que nadie te ve esforzándote, pero yo sí. Y me enamora verte así. 💛",
+  "No estás haciendo esto por nadie más que por ti — y aun así me tienes enamorado/a de veras. 💚",
+  "Cada vez que eliges cuidarte sobre lo fácil, te vuelves más hermosa por dentro y por fuera. 🌟",
+  "Eres mi persona favorita porque nunca deja de sorprenderme con su constancia. 🤍",
+  "Si el amor tuviera forma, sería tu rutina diaria: constante, bella y llena de amor propio. 💚",
+  "Me enamora que cuides de ti con la misma ternura con la que yo querría cuidarte. 💛",
+  "Tu fuerza no está en no caer — está en volver a levantarte. Y eso me enamora profundamente. ✨",
+  "Hay algo profundamente atractivo en quien se trabaja a sí misma cada día. Y ese alguien eres tú. 🔥",
+  "Cada recordatorio que cumples me recuerda por qué te quiero: porque eliges tu bienestar. 💚",
+  "Eres la demostración viviente de que el amor propio se entrena. Y verte entrenarlo me enamora. 🌹",
+];
+// Devuelve el mensaje de la semana actual (cambia cada lunes, estable dentro de la semana)
+function secretMsg() {
+  const now = new Date();
+  const jan1 = new Date(now.getFullYear(), 0, 1);
+  const week = Math.floor((now - jan1) / (7 * 864e5));
+  return SECRET_MSGS[week % SECRET_MSGS.length];
+}
 
 // ✏️ EDITABLE: Dedicatorias que salen en la pantalla de carga (splash).
 // Cada vez que abre la app se elige UNA al azar. Para agregar más,
@@ -282,6 +415,46 @@ const DEDICATORIAS = [
   "Cada día es una nueva oportunidad de ser tu mejor versión ✨",
   "No estás sola en esto — yo creo en ti siempre 🤍",
   "Tu esfuerzo de hoy es el resultado de mañana 🌱",
+  "Un paso a la vez, pero sin detenerte.",
+  "No estás empezando de cero, estás empezando con experiencia.",
+  "Estoy aquí para recordarte de lo que eres capaz.",
+  "Hoy es un buen día para cuidar de ti.",
+  "Tu bienestar es tu mejor inversión.",
+  "Confía en el proceso, incluso en los días lentos.",
+  "Cada pequeño esfuerzo cuenta más de lo que imaginas.",
+  "Hazlo por la persona en la que te estás convirtiendo.",
+  "No busques la perfección, busca la constancia.",
+  "Respira, enfócate y sigue adelante.",
+  "Los pequeños hábitos construyen grandes resultados.",
+  "La disciplina es elegir lo que más quieres sobre lo que quieres ahora.",
+  "Un día a la vez, un hábito a la vez.",
+  "La constancia vence al talento cuando el talento no se esfuerza.",
+  "Tu futuro yo te agradecerá lo que hagas hoy.",
+  "No se trata de tener tiempo, se trata de hacer tiempo.",
+  "Lo que haces hoy puede mejorar todos tus mañanas.",
+  "Cuidar tu cuerpo es una forma de respeto propio.",
+  "La motivación te inicia, el hábito te mantiene.",
+  "Haz de tu salud una prioridad, no una opción.",
+  "Un mal día no arruina todo tu progreso.",
+  "Descansa si lo necesitas, pero no renuncies.",
+  "Incluso el progreso más lento sigue siendo progreso.",
+  "Sé paciente contigo; las mejores cosas toman tiempo.",
+  "Hoy haz lo que puedas con lo que tienes.",
+  "Caerse está permitido, levantarse es obligatorio.",
+  "No te compares con nadie más que con quien eras ayer.",
+  "Está bien ir despacio mientras no te detengas.",
+  "Cada día es una nueva oportunidad para volver a intentarlo.",
+  "Celebra cada pequeña victoria del camino.",
+  "Menos excusas, más acción.",
+  "Tu cuerpo puede con todo, es a tu mente a quien debes convencer.",
+  "Empieza donde estás, usa lo que tienes.",
+  "El mejor momento para empezar es ahora.",
+  "Sigue brillando, lo estás haciendo increíble.",
+  "Enamórate de cuidar de ti.",
+  "Pequeños cambios, grandes diferencias.",
+  "Hoy vas a superar tus propios límites.",
+  "Tu salud es tu verdadera riqueza.",
+  "¡Tú puedes con esto y con mucho más!",
 ];
 
 // ✏️ EDITABLE: Campos de medidas corporales [clave, etiqueta]
@@ -323,6 +496,12 @@ function load() {
         if (!s.days[k]) s.days[k] = s.day;
         delete s.day;
       }
+      // Migrar de perfiles múltiples a perfil único
+      if (s.profiles && s.activeProfile && s.profiles[s.activeProfile]) {
+        s.profile = s.profiles[s.activeProfile];
+        delete s.profiles;
+        delete s.activeProfile;
+      }
       return s;
     }
   } catch {}
@@ -356,8 +535,6 @@ state.secret.photos = state.secret.photos || [];
 state.secret.playlist = state.secret.playlist || [];
 state.stats = state.stats || { perfectDays: 0, waterDays: 0, mealsDays: 0 };
 state.unlocked = state.unlocked || [];
-state.profiles = state.profiles || {};
-state.activeProfile = state.activeProfile || null;
 state.reminder = state.reminder || { on: false, time: "20:00", lastDate: null };
 state.weightReminder = state.weightReminder || { on: false, time: "09:00", lastDate: null };
 state.fastingStart = state.fastingStart || null;
@@ -365,6 +542,8 @@ state.fastsDone = state.fastsDone || 0;
 state.waterGoal = state.waterGoal || 2000;
 state.lastKcalAdjust = state.lastKcalAdjust || {};
 state.wallpaper = state.wallpaper || null;
+state.profileName = state.profileName || "";
+state.google = state.google || null;
 Object.keys(state.days).forEach(k => { state.days[k] = normalizeDay(state.days[k]); });
 
 let saveWarned = false;
@@ -379,12 +558,12 @@ function save() {
   }
 }
 const $ = (s) => document.querySelector(s);
-const PK = () => state.activeProfile || "default";
+const PK = () => "default"; // Perfil único
 const arr = (map, k) => map[k] || (map[k] = []);
 const D = () => {
   today = new Date().toDateString();
   const k = PK() + "|" + today;
-  if (!state.days[k] || state.days[k].date !== today) state.days[k] = freshDay();
+  if (!state.days[k] || state.days[k].date !== today) { state.days[k] = freshDay(); playSfx("cambio"); }
   const d = state.days[k];
   d.meals = d.meals || {}; d.habits = d.habits || {}; d.ex = d.ex || {};
   d.entries = d.entries || []; d.agua = d.agua || 0;
@@ -448,21 +627,24 @@ function renderFoods() {
 }
 
 // ===== Ejercicios =====
+let exViewDay = null; // día que se está viendo (null = hoy)
 function renderExercises() {
   const dayNames = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
   const todayName = dayNames[new Date().getDay()];
-  $("#dia-semana").textContent = todayName;
+  const viewName = exViewDay || todayName;
+  const isToday = viewName === todayName;
+  $("#dia-semana").textContent = isToday ? todayName : `${viewName} · solo lectura`;
   const w = planWeek();
   $("#plan-week").textContent = `${w}/4 · ${WEEK_PHASES[w - 1]}`;
   const factor = [1, 1.15, 1.3, 0.9][w - 1];
-  const ex = EXERCISES[todayName] || [];
+  const ex = EXERCISES[viewName] || [];
   $("#exercise-list").innerHTML = ex.map((e, i) => {
     if (e.h) return `<h2 class="ex-block">${e.h}</h2>`;
-    const id = todayName + i;
+    const id = viewName + i;
     const mins = parseInt(e.m);
     const dispM = isNaN(mins) || /descanso/i.test(e.t) ? e.m : `${Math.round(mins * factor)} min`;
-    return `<div class="item ${D().ex[id] ? "done" : ""}">
-      <span class="check" data-toggle="ex:${id}">${D().ex[id] ? "✓" : ""}</span>
+    return `<div class="item ${isToday && D().ex[id] ? "done" : ""}">
+      ${isToday ? `<span class="check" data-toggle="ex:${id}">${D().ex[id] ? "✓" : ""}</span>` : `<span class="check" style="visibility:hidden"></span>`}
       <div>
         <div class="item-title">${e.t}</div>
         <div class="item-sub">${e.d}</div>
@@ -600,9 +782,6 @@ function maybeAdjustKcal() {
   const delta = diff > 0 ? -100 : 100;
   p.goal = Math.max(-700, Math.min(500, p.goal + delta));
   state.lastKcalAdjust[PK()] = Date.now();
-  if (state.activeProfile && state.profiles[state.activeProfile]) {
-    state.profiles[state.activeProfile] = { name: state.profiles[state.activeProfile].name, ...p };
-  }
   save();
 }
 
@@ -723,6 +902,7 @@ function checkAchievements() {
   ALL_ACHIEVEMENTS.forEach(a => {
     if (conds[a.id] && !state.unlocked.includes(a.id)) {
       state.unlocked.push(a.id); changed = true;
+      playSfx("logro");
     }
   });
   if (changed) save();
@@ -783,8 +963,10 @@ function resetTimer() {
 // Registra el kg de hoy para un ejercicio sin duplicar entradas del mismo día
 function logGymKg(id, kg) {
   const logs = gymLogOf();
+  const prevMax = Math.max(0, ...logs.filter(l => l.ex === id).map(l => l.kg));
   const ex = logs.find(l => l.ex === id && l.date === today);
   if (ex) ex.kg = kg; else logs.push({ date: today, ex: id, kg });
+  if (kg > prevMax && prevMax > 0) playSfx("record");
 }
 function gymPR(exId) {
   const kgs = gymLogOf().filter(l => l.ex === exId).map(l => l.kg).filter(k => k > 0);
@@ -826,12 +1008,13 @@ function renderWeekStrip() {
   const dayNames = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
   const todayIdx = new Date().getDay();
   let html = "";
+  const selName = exViewDay || dayNames[todayIdx];
   for (let i = 0; i < 7; i++) {
     const idx = (todayIdx + i) % 7;
     const dn = dayNames[idx];
-    const first = (EXERCISES[dn] || [])[0];
-    html += `<div class="week-day ${i === 0 ? "today" : ""}">
-      <div class="week-name">${i === 0 ? "Hoy" : names[idx]}</div>
+    const first = (EXERCISES[dn] || []).find(x => x.t);
+    html += `<div class="week-day ${i === 0 && !exViewDay ? "today" : ""} ${dn === selName ? "sel" : ""}" data-exday="${dn}">
+      <div class="week-name">${i === 0 && !exViewDay ? "Hoy" : names[idx]}</div>
       <div class="week-ex">${first ? first.t : "—"}</div>
     </div>`;
   }
@@ -1145,15 +1328,23 @@ document.addEventListener("click", (e) => {
         const kg = kgInput ? +kgInput.value || 0 : 0;
         D().gym[id] = { done: true, kg, alt: cur.alt || 0 };
         if (kg > 0) logGymKg(id, kg);
+        playSfx("marcar");
       }
       maybeCountMealsDay();
       save(); renderGym(); renderAll(); return;
     }
     const obj = grp === "meal" ? D().meals : grp === "habit" ? D().habits : D().ex;
-    if (obj[id]) delete obj[id]; else { obj[id] = true; if (navigator.vibrate) navigator.vibrate(30); }
+    if (obj[id]) delete obj[id]; else { obj[id] = true; playSfx("marcar"); if (navigator.vibrate) navigator.vibrate(30); }
     maybeCountMealsDay();
     maybeCelebrate();
     save(); renderAll(); return;
+  }
+  const wd = e.target.closest("[data-exday]");
+  if (wd) {
+    const dn = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"][new Date().getDay()];
+    exViewDay = wd.dataset.exday === dn ? null : wd.dataset.exday;
+    renderExercises(); renderWeekStrip();
+    return;
   }
   const cl = e.target.closest("[data-check-list]");
   if (cl) {
@@ -1237,8 +1428,9 @@ document.querySelectorAll(".tab").forEach(tab => {
 });
 
 // Agua
-$("#agua-250").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 250); save(); renderAll(); });
-$("#agua-500").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 500); save(); renderAll(); });
+$("#agua-250").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 250); playSfx("agua"); save(); renderAll(); });
+$("#agua-500").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 500); playSfx("agua"); save(); renderAll(); });
+$("#agua-reset").addEventListener("click", () => { playSfx("agua"); });
 $("#agua-reset").addEventListener("click", () => { D().agua = 0; save(); renderAll(); });
 
 // Alimentos: autocompletado desde la base local
@@ -1318,10 +1510,14 @@ $("#barcode-btn").addEventListener("click", async () => {
 // Plan
 $("#plan-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  state.profile = profileFields();
-  if (state.activeProfile && state.profiles[state.activeProfile]) {
-    state.profiles[state.activeProfile] = { name: state.profiles[state.activeProfile].name, ...state.profile };
-  }
+  state.profile = {
+    sex: $("#p-sex").value,
+    age: +$("#p-age").value || null,
+    weight: +$("#p-weight").value || null,
+    height: +$("#p-height").value || null,
+    activity: +$("#p-activity").value || null,
+    goal: +$("#p-goal").value || null,
+  };
   save(); if (planReady(state.profile)) calcPlan(); renderDashboard();
 });
 
@@ -1392,6 +1588,7 @@ $("#export-btn").addEventListener("click", () => {
   a.click();
 });
 $("#reset-btn").addEventListener("click", () => {
+  playSfx("borrar");
   if (confirm("¿Borrar TODOS los datos? Esta acción no se puede deshacer.")) {
     localStorage.removeItem(KEY);
     location.reload();
@@ -1444,78 +1641,8 @@ $("#fast-stop").addEventListener("click", () => {
 });
 setInterval(renderFasting, 30000);
 
-// ===== Perfiles =====
+// ===== Utilidades =====
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-function numOrNull(sel) {
-  const el = $(sel);
-  return el.value === "" ? null : +el.value;
-}
-function profileFields() {
-  return {
-    sex: $("#p-sex").value,
-    age: numOrNull("#p-age"),
-    weight: numOrNull("#p-weight"),
-    height: numOrNull("#p-height"),
-    activity: numOrNull("#p-activity"),
-    goal: numOrNull("#p-goal"),
-  };
-}
-function renderProfiles() {
-  const sel = $("#profile-select");
-  const ids = Object.keys(state.profiles);
-  sel.innerHTML = '<option value="">— Sin perfil —</option>' +
-    ids.map((id) => `<option value="${id}">${esc(state.profiles[id].name)}</option>`).join("");
-  sel.value = state.activeProfile || "";
-}
-$("#profile-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = $("#p-name").value.trim();
-  if (!name) return;
-  const id = "p" + Date.now();
-  state.profiles[id] = { name, ...profileFields() };
-  state.activeProfile = id;
-  const f = { ...state.profiles[id] };
-  delete f.name;
-  state.profile = f;
-  $("#p-name").value = "";
-  save(); renderProfiles(); renderPlanForm();
-  if (planReady(state.profile)) calcPlan();
-  renderDashboard();
-});
-$("#profile-select").addEventListener("change", (e) => {
-  const id = e.target.value;
-  state.activeProfile = id || null;
-  if (id) {
-    const f = { ...state.profiles[id] };
-    delete f.name;
-    state.profile = f;
-  } else {
-    state.profile = null;
-  }
-  $("#plan-result").style.display = "none";
-  save(); renderPlanForm();
-  if (planReady(state.profile) && macrosOf()) calcPlan();
-  renderDashboard();
-});
-$("#profile-del").addEventListener("click", () => {
-  const id = state.activeProfile;
-  if (!id || !state.profiles[id]) return;
-  if (!confirm(`¿Eliminar el perfil "${state.profiles[id].name}"?`)) return;
-  delete state.profiles[id];
-  const rest = Object.keys(state.profiles);
-  state.activeProfile = rest[0] || null;
-  if (state.activeProfile) {
-    const f = { ...state.profiles[state.activeProfile] };
-    delete f.name;
-    state.profile = f;
-  } else {
-    state.profile = null;
-  }
-  $("#plan-result").style.display = "none";
-  save(); renderProfiles(); renderPlanForm();
-  if (planReady(state.profile) && macrosOf()) calcPlan();
-  renderDashboard();
-});
 
 // ===== Recordatorios =====
 function remindStatusText(r, extra) {
@@ -1649,6 +1776,7 @@ $("#menu-list").addEventListener("click", () => {
 // ===== Timer de descanso (entre series) =====
 let restInt = null, restAC = null;
 function restBeep() {
+  if (playSfx("pitido")) return;
   try {
     restAC = restAC || new (window.AudioContext || window.webkitAudioContext)();
     if (restAC.state === "suspended") restAC.resume();
@@ -1658,6 +1786,19 @@ function restBeep() {
     g.gain.exponentialRampToValueAtTime(0.001, restAC.currentTime + 0.4);
     o.connect(g); g.connect(restAC.destination);
     o.start(); o.stop(restAC.currentTime + 0.4);
+  } catch {}
+}
+function restTick() {
+  if (playSfx("tic")) return;
+  try {
+    restAC = restAC || new (window.AudioContext || window.webkitAudioContext)();
+    if (restAC.state === "suspended") restAC.resume();
+    const o = restAC.createOscillator(), g = restAC.createGain();
+    o.type = "square"; o.frequency.value = 1200;
+    g.gain.setValueAtTime(0.05, restAC.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, restAC.currentTime + 0.06);
+    o.connect(g); g.connect(restAC.destination);
+    o.start(); o.stop(restAC.currentTime + 0.06);
   } catch {}
 }
 $("#rest-start").addEventListener("click", () => {
@@ -1678,6 +1819,7 @@ $("#rest-start").addEventListener("click", () => {
       setTimeout(() => { $("#rest-display").textContent = secs; }, 4000);
       return;
     }
+    restTick();
     $("#rest-display").textContent = left;
   }, 1000);
 });
@@ -1826,8 +1968,8 @@ function renderSecretMsg() {
   const done = state.stats.perfectDays || 0;
   const box = $("#secret-msg-box");
   if (done >= SECRET_UNLOCK_DAYS) {
-    box.innerHTML = `<div class="secret-reveal">💌 ${SECRET_MSG}</div>
-      <p class="hint">Desbloqueado · ${done} días completados 🏆</p>`;
+    box.innerHTML = `<div class="secret-reveal">💌 ${secretMsg()}</div>
+      <p class="hint">Desbloqueado · ${done} días completados 🏆 · mensaje nuevo cada semana ✨</p>`;
   } else {
     const pct = Math.round(done / SECRET_UNLOCK_DAYS * 100);
     box.innerHTML = `<p class="hint">🔒 Hay un mensaje escondido que se desbloquea al completar <strong>${SECRET_UNLOCK_DAYS} días</strong> de hábitos.</p>
@@ -2194,14 +2336,227 @@ function renderWeekSummary() {
     <div class="week-stat"><span class="big">${state.racha}🔥</span><span class="lbl">racha actual${wDelta}</span></div>`;
 }
 
+// ===== Google / Drive (opcional) =====
+const GOOGLE_CLIENT_ID = "594506576378-64arglri3749clsq98u0d94braiepvl6.apps.googleusercontent.com";
+const GOOGLE_SCOPES = "openid email profile https://www.googleapis.com/auth/drive.file";
+const DRIVE_FOLDER = "FitNutri";
+let gClient = null, gToken = null, gTokenExp = 0, gPending = null, gPendingReject = null, gScriptLoading = null;
+
+function setDriveStatus(t) { const el = $("#drive-status"); if (el) el.textContent = t || ""; }
+
+function renderGoogleStatus() {
+  const el = $("#google-status");
+  if (!el) return;
+  const connected = !!(state.google && state.google.email);
+  el.textContent = connected
+    ? `🔗 Conectado como ${state.google.name || ""} (${state.google.email}). Los datos solo se suben si tú lo pides.`
+    : "Sin conectar. Conecta tu cuenta solo si quieres guardar una copia de tus datos en Google Drive (opcional).";
+  ["#drive-backup", "#drive-restore"].forEach((s) => { const b = $(s); if (b) b.disabled = !connected; });
+}
+
+function ensureGoogle() {
+  if (gClient) return Promise.resolve(true);
+  if (gScriptLoading) return gScriptLoading;
+  gScriptLoading = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "https://accounts.google.com/gsi/client";
+    s.onload = () => {
+      gClient = google.accounts.oauth2.initTokenClient({
+        client_id: GOOGLE_CLIENT_ID,
+        scope: GOOGLE_SCOPES,
+        callback: onGoogleToken,
+      });
+      resolve(true);
+    };
+    s.onerror = () => reject(new Error("No se pudo cargar Google"));
+    document.head.appendChild(s);
+  });
+  return gScriptLoading;
+}
+
+function onGoogleToken(resp) {
+  if (resp.error) {
+    const rj = gPendingReject; gPending = gPendingReject = null;
+    if (rj) rj(new Error(resp.error_description || resp.error));
+    else setDriveStatus("Error de Google: " + (resp.error_description || resp.error));
+    return;
+  }
+  gToken = resp.access_token;
+  gTokenExp = Date.now() + (resp.expires_in || 3600) * 1000;
+  fetch("https://www.googleapis.com/oauth2/v3/userinfo", { headers: { Authorization: "Bearer " + gToken } })
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error("userinfo " + r.status))))
+    .then((u) => {
+      state.google = { name: u.name || "", email: u.email || "" };
+      save(); renderGoogleStatus();
+      setDriveStatus("Conectado como " + (u.email || ""));
+    })
+    .catch(() => setDriveStatus("Conectado."))
+    .finally(() => { const fn = gPending; gPending = gPendingReject = null; if (fn) fn(); });
+}
+
+function googleToken() {
+  return new Promise((resolve, reject) => {
+    ensureGoogle().then(() => {
+      if (gToken && Date.now() < gTokenExp - 60000) return resolve();
+      gPending = resolve; gPendingReject = reject;
+      gClient.requestAccessToken({ prompt: "" });
+      setTimeout(() => {
+        if (gPending === resolve) { gPending = gPendingReject = null; reject(new Error("cancelado")); }
+      }, 120000);
+    }).catch(reject);
+  });
+}
+
+async function driveApi(path, opts = {}) {
+  const r = await fetch("https://www.googleapis.com/drive/v3/" + path, {
+    ...opts,
+    headers: { Authorization: "Bearer " + gToken, ...(opts.headers || {}) },
+  });
+  if (!r.ok) throw new Error("Drive respondió " + r.status);
+  return r.status === 204 ? null : r.json();
+}
+
+async function ensureDriveFolder() {
+  const q = encodeURIComponent(`name='${DRIVE_FOLDER}' and mimeType='application/vnd.google-apps.folder' and trashed=false`);
+  const found = await driveApi(`files?q=${q}&fields=files(id)&pageSize=1`);
+  if (found.files && found.files.length) return found.files[0].id;
+  const created = await driveApi("files", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: DRIVE_FOLDER, mimeType: "application/vnd.google-apps.folder" }),
+  });
+  return created.id;
+}
+
+async function driveUploadJson(folderId, name, obj) {
+  const q = encodeURIComponent(`name='${name}' and '${folderId}' in parents and trashed=false`);
+  const found = await driveApi(`files?q=${q}&fields=files(id)&pageSize=1`);
+  const fd = new FormData();
+  fd.append("metadata", new Blob([JSON.stringify(found.files.length ? { name } : { name, parents: [folderId] })], { type: "application/json" }));
+  fd.append("file", new Blob([JSON.stringify(obj)], { type: "application/json" }));
+  const url = found.files.length
+    ? `https://www.googleapis.com/upload/drive/v3/files/${found.files[0].id}?uploadType=multipart`
+    : "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart";
+  const r = await fetch(url, { method: found.files.length ? "PATCH" : "POST", headers: { Authorization: "Bearer " + gToken }, body: fd });
+  if (!r.ok) throw new Error("No se pudo subir (" + r.status + ")");
+}
+
+async function backupToDrive() {
+  setDriveStatus("Respaldando…");
+  try {
+    await googleToken();
+    const folderId = await ensureDriveFolder();
+    const data = { ...state };
+    delete data.google;
+    await driveUploadJson(folderId, "fitnutri-backup.json", { app: "fitnutri", savedAt: new Date().toISOString(), data });
+    setDriveStatus(`✅ Respaldo guardado en Drive › ${DRIVE_FOLDER}`);
+  } catch (e) {
+    setDriveStatus("Error al respaldar: " + e.message);
+  }
+}
+
+async function restoreFromDrive() {
+  setDriveStatus("Buscando respaldo…");
+  try {
+    await googleToken();
+    const folderId = await ensureDriveFolder();
+    const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
+    const list = await driveApi(`files?q=${q}&fields=files(id,name,modifiedTime)&orderBy=modifiedTime desc&pageSize=10`);
+    const f = (list.files || []).find((x) => x.name === "fitnutri-backup.json");
+    if (!f) { setDriveStatus("No hay respaldo en Drive todavía."); return; }
+    const r = await fetch(`https://www.googleapis.com/drive/v3/files/${f.id}?alt=media`, { headers: { Authorization: "Bearer " + gToken } });
+    if (!r.ok) throw new Error("No se pudo descargar (" + r.status + ")");
+    const payload = await r.json();
+    if (!payload.data) throw new Error("El respaldo está vacío");
+    if (!confirm("¿Restaurar el respaldo de Drive?\nSe reemplazarán los datos actuales del dispositivo.")) { setDriveStatus(""); return; }
+    const google = state.google;
+    state = payload.data;
+    state.google = google;
+    save();
+    setDriveStatus("✅ Restaurado. Recargando…");
+    setTimeout(() => location.reload(), 800);
+  } catch (e) {
+    setDriveStatus("Error al restaurar: " + e.message);
+  }
+}
+
+$("#google-connect").addEventListener("click", () => {
+  setDriveStatus("Conectando…");
+  ensureGoogle().then(() => {
+    gPending = () => {};
+    gClient.requestAccessToken({ prompt: "consent" });
+    setTimeout(() => { if (gPending) { gPending = null; setDriveStatus("Conexión cancelada."); } }, 120000);
+  }).catch((e) => setDriveStatus(e.message));
+});
+$("#drive-backup").addEventListener("click", backupToDrive);
+$("#drive-restore").addEventListener("click", restoreFromDrive);
+$("#profile-name").addEventListener("change", (e) => {
+  state.profileName = e.target.value.trim();
+  save();
+  const dn = $("#dashboard-name");
+  if (dn) dn.textContent = state.profileName ? `Hola, ${state.profileName} 👋` : "";
+});
+
+// ===== Efectos de sonido (carpeta /sonidos) =====
+// Archivos .mp3/.m4a/.wav/.ogg; suena el que CONTENGA la palabra clave
+// (ej. "marcar", "agua", "logro", "record", "tic", "borrar").
+// Si hay varios que coinciden se elige uno al azar. Devuelve true si sonó.
+let sfxFiles = null;
+fetch("sonidos/list.json").then(r => r.ok ? r.json() : []).then(list => {
+  sfxFiles = (list || []).filter(f => /\.(mp3|m4a|wav|ogg)$/i.test(f));
+}).catch(() => { sfxFiles = []; });
+function playSfx(word) {
+  if (!state.sfx || !sfxFiles || !sfxFiles.length) return false;
+  const opts = sfxFiles.filter(f => f.toLowerCase().includes(word));
+  if (!opts.length) return false;
+  try {
+    const a = new Audio("sonidos/" + opts[Math.floor(Math.random() * opts.length)]);
+    a.volume = 0.6;
+    a.play().catch(() => {});
+    return true;
+  } catch { return false; }
+}
+
+// ===== Música de fondo (pista al azar de /musica, en loop) =====
+// Se reproduce solo al abrir la app (tras el primer toque, requisito
+// de los navegadores) y se pausa cuando ella pone su música en 💌.
+// ✏️ EDITABLE: agrega archivos .mp3/.m4a/.wav/.ogg a la carpeta musica/
+const bgAudio = new Audio();
+bgAudio.loop = true;
+bgAudio.volume = 0.22;
+fetch("musica/list.json").then(r => r.ok ? r.json() : []).then(list => {
+  const files = (list || []).filter(f => /\.(mp3|m4a|wav|ogg)$/i.test(f));
+  if (files.length) bgAudio.src = "musica/" + files[Math.floor(Math.random() * files.length)];
+}).catch(() => {});
+function startAmbient() {
+  if (!state.ambient || !bgAudio.src) return;
+  bgAudio.play().catch(() => {});
+}
+function stopAmbient() {
+  bgAudio.pause();
+}
+// Se calla cuando suena la música de ella y vuelve cuando para
+audio.addEventListener("play", () => { if (state.ambient) bgAudio.pause(); });
+audio.addEventListener("pause", () => { if (state.ambient && !audio.paused) return; if (state.ambient) startAmbient(); });
+audio.addEventListener("ended", () => { if (state.ambient) startAmbient(); });
+state.ambient = true; // música de fondo siempre activa
+state.sfx = true; // efectos siempre activos
+// Los navegadores exigen un toque antes de sonar: arranca al primer toque si estaba activado
+document.addEventListener("pointerdown", function once() {
+  document.removeEventListener("pointerdown", once);
+  if (state.ambient && audio.paused) startAmbient();
+}, { once: true });
+
 // ===== Init =====
 $("#food-options").innerHTML = FOODS.map(f => `<option value="${f.n}"></option>`).join("");
 applyTheme();
 renderPlanForm();
-renderProfiles();
 renderFasting();
 renderCafSugar();
 $("#water-goal").value = state.waterGoal;
+$("#profile-name").value = state.profileName || "";
+$("#dashboard-name").textContent = state.profileName ? `Hola, ${state.profileName} 👋` : "";
+renderGoogleStatus();
 if (planReady(state.profile)) {
   maybeAdjustKcal();
   if (macrosOf()) calcPlan();

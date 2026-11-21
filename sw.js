@@ -1,6 +1,6 @@
 // ✏️ EDITABLE: sube el número de versión en CADA cambio de app.js / styles.css /
 // index.html / imágenes, si no los usuarios con la app instalada ven la versión vieja
-const CACHE = "fitnutri-v29";
+const CACHE = "fitnutri-v46";
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -18,7 +18,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
   // Las listas de fotos cambian al agregar/quitar archivos: nunca cachear
-  if (url.pathname.endsWith("/fondos/list.json") || url.pathname.endsWith("/wallpapers/list.json")) return;
+  if (url.pathname.endsWith("/fondos/list.json") || url.pathname.endsWith("/wallpapers/list.json") || url.pathname.endsWith("/sonidos/list.json") || url.pathname.endsWith("/musica/list.json")) return;
   e.respondWith(
     caches.match(e.request).then((r) => r || fetch(e.request).then((res) => {
       const copy = res.clone();

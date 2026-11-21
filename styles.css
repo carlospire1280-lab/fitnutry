@@ -443,11 +443,15 @@ button:active { transform: scale(.97); }
 .week-strip { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 4px; scrollbar-width: none; }
 .week-strip::-webkit-scrollbar { display: none; }
 .week-day {
-  flex: 0 0 auto; min-width: 90px;
+  flex: 0 0 auto; min-width: 90px; cursor: pointer;
   background: var(--card); border: 1px solid var(--border);
   border-radius: 10px; padding: 8px 10px; text-align: center;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s;
 }
+.week-day:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+.week-day:active { transform: scale(.96); }
 .week-day.today { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
+.week-day.sel { border-color: var(--accent, #0ea5e9); box-shadow: 0 0 0 1px var(--accent, #0ea5e9); }
 .week-name { font-size: .75rem; font-weight: 700; color: var(--green); }
 .week-ex { font-size: .72rem; color: var(--muted); margin-top: 2px; }
 
@@ -731,4 +735,111 @@ input:focus, select:focus { outline:none; border-color: var(--green); box-shadow
 /* Si el usuario prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
+
+/* ===== Botones más llamativos ===== */
+/* Gradiente verde, brillo interior y sombra de color */
+button:not(.ghost-btn):not(.mini-btn):not(.mini-del):not(.wp-btn):not(.tab) {
+  background-color: var(--green);
+  background-image: linear-gradient(135deg, var(--green) 0%, var(--green-dark, #15803d) 100%);
+  font-weight: 700;
+  letter-spacing: .3px;
+  box-shadow:
+    0 4px 14px rgba(22, 163, 74, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .28),
+    inset 0 -2px 4px rgba(0, 0, 0, .15);
+  position: relative;
+  overflow: hidden;
+}
+/* Brillo que cruza el botón al pasar el dedo/mouse */
+button:not(.ghost-btn):not(.mini-btn):not(.mini-del):not(.wp-btn):not(.tab)::after {
+  content: "";
+  position: absolute;
+  top: -60%; left: -70%;
+  width: 45%; height: 220%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-20deg);
+  transition: left .55s ease;
+  pointer-events: none;
+}
+button:not(.ghost-btn):not(.mini-btn):not(.mini-del):not(.wp-btn):not(.tab):hover::after { left: 135%; }
+button:not(.ghost-btn):not(.mini-btn):not(.mini-del):not(.wp-btn):not(.tab):hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 22px rgba(22, 163, 74, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .35),
+    inset 0 -2px 4px rgba(0, 0, 0, .15);
+}
+button:not(.ghost-btn):not(.mini-btn):not(.mini-del):not(.wp-btn):not(.tab):active {
+  transform: scale(.95) translateY(0);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, .4), inset 0 2px 5px rgba(0,0,0,.2);
+}
+
+/* Ghost buttons: borde que se llena con gradiente al hover */
+.ghost-btn {
+  transition: all .2s ease;
+  font-weight: 600;
+}
+.ghost-btn:hover {
+  background-color: var(--green);
+  background-image: linear-gradient(135deg, var(--green), var(--green-dark, #15803d));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, .35);
+}
+.ghost-btn.danger:hover {
+  background-color: #dc2626;
+  background-image: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, .35);
+}
+.ghost-btn:active { transform: scale(.96); }
+
+/* Botones mini: mismo toque de color */
+.mini-btn, .mini-del {
+  transition: transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.mini-btn:hover, .mini-del:hover { transform: scale(1.12); }
+.mini-btn:active, .mini-del:active { transform: scale(.9); }
+
+/* Tarjetas del dashboard: brillo sutil al cargar */
+.card { animation: cardGlow 3.2s ease-in-out infinite; }
+@keyframes cardGlow {
+  0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  50% { box-shadow: 0 4px 16px rgba(22,163,74,.18); }
+}
+[data-theme="dark"] .card, [data-wallpaper] .card { animation: none; }
+
+/* Pestaña activa: subrayado animado más grueso */
+.tab.active { position: relative; }
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 15%; right: 15%; bottom: -2px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--green), var(--green-dark, #15803d));
+  animation: tabSlide 2.8s ease-in-out infinite;
+}
+@keyframes tabSlide {
+  0%, 100% { transform: scaleX(1); opacity: .9; }
+  50% { transform: scaleX(.82); opacity: .6; }
+}
+
+/* Inputs: borde animado al enfocar */
+input:focus, select:focus {
+  animation: inputFocus .3s ease;
+}
+@keyframes inputFocus {
+  0% { box-shadow: 0 0 0 0 rgba(22,163,74,.4); }
+  100% { box-shadow: 0 0 0 3px rgba(22,163,74,.18); }
+}
+
+/* Botón principal del plan: latido suave para invitar a calcular */
+.plan-form button {
+  animation: ctaPulse 2.6s ease-in-out infinite;
+}
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(22,163,74,.35), inset 0 1px 0 rgba(255,255,255,.28); }
+  50% { box-shadow: 0 4px 22px rgba(22,163,74,.6), inset 0 1px 0 rgba(255,255,255,.28); }
 }

@@ -11,18 +11,19 @@ try {
   exit 0
 }
 Write-Host "FitNutri en http://localhost:8080  (Ctrl+C para parar)"
-$mime = @{ ".html" = "text/html"; ".css" = "text/css"; ".js" = "application/javascript"; ".json" = "application/json"; ".svg" = "image/svg+xml"; ".png" = "image/png"; ".jpg" = "image/jpeg"; ".jpeg" = "image/jpeg"; ".webp" = "image/webp"; ".gif" = "image/gif"; ".ico" = "image/x-icon"; ".webmanifest" = "application/manifest+json"; ".mp3" = "audio/mpeg"; ".m4a" = "audio/mp4" }
+$mime = @{ ".html" = "text/html"; ".css" = "text/css"; ".js" = "application/javascript"; ".json" = "application/json"; ".svg" = "image/svg+xml"; ".png" = "image/png"; ".jpg" = "image/jpeg"; ".jpeg" = "image/jpeg"; ".webp" = "image/webp"; ".gif" = "image/gif"; ".ico" = "image/x-icon"; ".webmanifest" = "application/manifest+json"; ".mp3" = "audio/mpeg"; ".m4a" = "audio/mp4"; ".wav" = "audio/wav"; ".ogg" = "audio/ogg" }
 while ($listener.IsListening) {
   $ctx = $listener.GetContext()
   $path = $ctx.Request.Url.LocalPath
   if ($path -eq "/") { $path = "/index.html" }
-  # Lista dinámica de imágenes de fondos/ y wallpapers/ (JSON para la app)
-  if ($path -eq "/fondos/list.json" -or $path -eq "/wallpapers/list.json") {
+  # Lista dinámica de archivos de fondos/, wallpapers/, sonidos/ y musica/ (JSON para la app)
+  if ($path -eq "/fondos/list.json" -or $path -eq "/wallpapers/list.json" -or $path -eq "/sonidos/list.json" -or $path -eq "/musica/list.json") {
     $dirName = ($path -split "/")[1]
+    $extRx = if ($dirName -eq "sonidos" -or $dirName -eq "musica") { '^\.(mp3|m4a|wav|ogg)$' } else { '^\.(jpe?g|png|webp|gif)$' }
     $files = Get-ChildItem (Join-Path $root $dirName) -File -ErrorAction SilentlyContinue |
-      Where-Object { $_.Extension -match '^\.(jpe?g|png|webp|gif)$' } |
-      ForEach-Object { $_.Name }
-    $json = "[" + (($files | ForEach-Object { '"' + $_ + '"' }) -join ",") + "]"
+      Where-Object { $_.Extension -match $extRx } |
+      ForEach-Object { '"' + ($_.Name -replace '\\','\\' -replace '"','\"') + '"' }
+    $json = "[" + ($files -join ",") + "]"
     $bytes = [System.Text.Encoding]::UTF8.GetBytes($json)
     $ctx.Response.ContentType = "application/json; charset=utf-8"
     $ctx.Response.OutputStream.Write($bytes, 0, $bytes.Length)
