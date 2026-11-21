@@ -1349,14 +1349,14 @@ document.addEventListener("click", (e) => {
   const cl = e.target.closest("[data-check-list]");
   if (cl) {
     const it = listOf()[+cl.dataset.checkList];
-    it.done = !it.done; save(); renderList(); return;
+    it.done = !it.done; playSfx("click"); save(); renderList(); return;
   }
   const dl = e.target.closest("[data-del-list]");
   if (dl) { listOf().splice(+dl.dataset.delList, 1); save(); renderList(); return; }
   const ct = e.target.closest("[data-check-todo]");
   if (ct) {
     const todo = todosOf().find(x => x.id === ct.dataset.checkTodo);
-    if (todo) { todo.done = !todo.done; save(); renderTodos(); }
+    if (todo) { todo.done = !todo.done; playSfx("click"); save(); renderTodos(); }
     return;
   }
   const dtd = e.target.closest("[data-del-todo]");
@@ -1428,9 +1428,9 @@ document.querySelectorAll(".tab").forEach(tab => {
 });
 
 // Agua
-$("#agua-250").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 250); playSfx("agua"); save(); renderAll(); });
-$("#agua-500").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 500); playSfx("agua"); save(); renderAll(); });
-$("#agua-reset").addEventListener("click", () => { playSfx("agua"); });
+$("#agua-250").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 250); playSfx("agua", 3.5); save(); renderAll(); });
+$("#agua-500").addEventListener("click", () => { D().agua = Math.min(aguaMeta(), D().agua + 500); playSfx("agua", 3.5); save(); renderAll(); });
+$("#agua-reset").addEventListener("click", () => { playSfx("agua", 3.5); });
 $("#agua-reset").addEventListener("click", () => { D().agua = 0; save(); renderAll(); });
 
 // Alimentos: autocompletado desde la base local
@@ -1449,6 +1449,7 @@ $("#f-name").addEventListener("change", () => {
 });
 $("#food-form").addEventListener("submit", (e) => {
   e.preventDefault();
+  playSfx("click");
   const qty = +$("#f-qty").value || 0;
   const scale = qty > 0 ? qty / 100 : 1;
   D().entries.push({
@@ -1524,7 +1525,7 @@ $("#plan-form").addEventListener("submit", (e) => {
 // Lista
 $("#list-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  listOf().push({ name: $("#l-item").value.trim(), done: false });
+  listOf().push({ name: $("#l-item").value.trim(), done: false }); playSfx("click");
   e.target.reset(); save(); renderList();
 });
 $("#list-autogen").addEventListener("click", () => {
@@ -1543,7 +1544,7 @@ $("#todo-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const text = $("#todo-input").value.trim();
   if (!text) return;
-  todosOf().push({ id: "t" + Date.now() + Math.random().toString(36).slice(2, 6), text, done: false });
+  playSfx("click"); todosOf().push({ id: "t" + Date.now() + Math.random().toString(36).slice(2, 6), text, done: false });
   e.target.reset(); save(); renderTodos();
 });
 $("#todo-clear").addEventListener("click", () => {
@@ -1557,7 +1558,7 @@ $("#weight-form").addEventListener("submit", (e) => {
   const kg = +$("#w-kg").value;
   const ws = weightsOf();
   const last = ws[ws.length - 1];
-  if (last && last.date === today) last.kg = kg;
+  playSfx("click"); if (last && last.date === today) last.kg = kg;
   else ws.push({ date: today, kg });
   e.target.reset(); save(); renderWeights(); renderAchievements();
   maybeAdjustKcal();
@@ -1565,8 +1566,8 @@ $("#weight-form").addEventListener("submit", (e) => {
 });
 
 // Timer
-$("#timer-start").addEventListener("click", startTimer);
-$("#timer-reset").addEventListener("click", resetTimer);
+$("#timer-start").addEventListener("click", () => { playSfx("click"); startTimer(); });
+$("#timer-reset").addEventListener("click", () => { playSfx("click"); resetTimer(); });
 ["#t-work", "#t-rest", "#t-rounds"].forEach(s => $(s).addEventListener("change", resetTimer));
 
 // Ajustes
@@ -1626,12 +1627,12 @@ function renderFasting() {
     el.textContent = "⏰ Ventana terminada — inicia un nuevo ayuno";
   }
 }
-$("#fast-start").addEventListener("click", () => {
+$("#fast-start").addEventListener("click", () => { playSfx("click");
   if (state.fastingStart) return;
   state.fastingStart = Date.now();
   save(); renderFasting();
 });
-$("#fast-stop").addEventListener("click", () => {
+$("#fast-stop").addEventListener("click", () => { playSfx("click");
   if (state.fastingStart && Date.now() - state.fastingStart >= FAST_H * 36e5) {
     state.fastsDone++;
     checkAchievements();
@@ -1734,12 +1735,12 @@ function addSteps(n) {
   D().steps += n;
   save(); renderSteps(); renderDashboard();
 }
-$("#steps-500").addEventListener("click", () => addSteps(500));
-$("#steps-1000").addEventListener("click", () => addSteps(1000));
+$("#steps-500").addEventListener("click", () => { playSfx("click"); addSteps(500); });
+$("#steps-1000").addEventListener("click", () => { playSfx("click"); addSteps(1000); });
 $("#steps-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const n = +$("#steps-input").value || 0;
-  if (n > 0) { addSteps(n); e.target.reset(); }
+  if (n > 0) { playSfx("click"); addSteps(n); e.target.reset(); }
 });
 
 // ===== Medidas corporales =====
@@ -1752,7 +1753,7 @@ $("#measures-form").addEventListener("submit", (e) => {
     if (v > 0) { m[k] = v; any = true; }
   });
   if (!any) return;
-  measuresOf().push(m);
+  playSfx("click"); measuresOf().push(m);
   e.target.reset(); save(); renderMeasures(); renderAchievements();
 });
 
@@ -1801,7 +1802,7 @@ function restTick() {
     o.start(); o.stop(restAC.currentTime + 0.06);
   } catch {}
 }
-$("#rest-start").addEventListener("click", () => {
+$("#rest-start").addEventListener("click", () => { playSfx("click");
   const secs = +$("#rest-secs").value || 60;
   clearInterval(restInt);
   try { restAC = restAC || new (window.AudioContext || window.webkitAudioContext)(); restAC.resume(); } catch {}
@@ -1823,7 +1824,7 @@ $("#rest-start").addEventListener("click", () => {
     $("#rest-display").textContent = left;
   }, 1000);
 });
-$("#rest-reset").addEventListener("click", () => {
+$("#rest-reset").addEventListener("click", () => { playSfx("click");
   clearInterval(restInt);
   $("#rest-display").textContent = +$("#rest-secs").value || 60;
 });
@@ -1842,11 +1843,12 @@ document.addEventListener("change", (e) => {
 // Día de trampa + cafeína/azúcar
 $("#cheat-toggle").addEventListener("click", () => {
   D().cheat = !D().cheat;
+  playSfx("click");
   save(); renderMeals();
 });
-$("#caf-btn").addEventListener("click", () => { D().caffeine++; save(); renderCafSugar(); });
-$("#sugar-btn").addEventListener("click", () => { D().sugar++; save(); renderCafSugar(); });
-$("#caf-reset").addEventListener("click", () => { D().caffeine = 0; D().sugar = 0; save(); renderCafSugar(); });
+$("#caf-btn").addEventListener("click", () => { playSfx("click"); D().caffeine++; save(); renderCafSugar(); });
+$("#sugar-btn").addEventListener("click", () => { playSfx("click"); D().sugar++; save(); renderCafSugar(); });
+$("#caf-reset").addEventListener("click", () => { playSfx("click"); D().caffeine = 0; D().sugar = 0; save(); renderCafSugar(); });
 function renderCafSugar() {
   $("#caf-text").textContent = `☕ ${D().caffeine} · 🍬 ${D().sugar}`;
 }
@@ -2505,13 +2507,14 @@ let sfxFiles = null;
 fetch("sonidos/list.json").then(r => r.ok ? r.json() : []).then(list => {
   sfxFiles = (list || []).filter(f => /\.(mp3|m4a|wav|ogg)$/i.test(f));
 }).catch(() => { sfxFiles = []; });
-function playSfx(word) {
+function playSfx(word, maxSec) {
   if (!state.sfx || !sfxFiles || !sfxFiles.length) return false;
   const opts = sfxFiles.filter(f => f.toLowerCase().includes(word));
   if (!opts.length) return false;
   try {
     const a = new Audio("sonidos/" + opts[Math.floor(Math.random() * opts.length)]);
     a.volume = 0.6;
+    if (maxSec) setTimeout(() => { try { a.pause(); } catch {} }, maxSec * 1000);
     a.play().catch(() => {});
     return true;
   } catch { return false; }
