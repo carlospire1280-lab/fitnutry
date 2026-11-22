@@ -1,6 +1,6 @@
 // ✏️ EDITABLE: sube el número de versión en CADA cambio de app.js / styles.css /
 // index.html / imágenes, si no los usuarios con la app instalada ven la versión vieja
-const CACHE = "fitnutri-v49";
+const CACHE = "fitnutri-v50";
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
