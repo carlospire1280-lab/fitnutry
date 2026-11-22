@@ -2530,7 +2530,17 @@ bgAudio.volume = 0.22;
 fetch("musica/list.json").then(r => r.ok ? r.json() : []).then(list => {
   const files = (list || []).filter(f => /\.(mp3|m4a|wav|ogg)$/i.test(f));
   if (files.length) bgAudio.src = "musica/" + files[Math.floor(Math.random() * files.length)];
+  kickAmbient();
 }).catch(() => {});
+// Los navegadores exigen un toque antes de sonar: reintenta en cada toque
+// hasta que la lista de música cargó y logre sonar (en el cel tarda más)
+function kickAmbient() {
+  if (!state.ambient || !audio.paused || !bgAudio.src) return;
+  bgAudio.play().then(() => {
+    document.removeEventListener("pointerdown", kickAmbient);
+  }).catch(() => {});
+}
+document.addEventListener("pointerdown", kickAmbient);
 function startAmbient() {
   if (!state.ambient || !bgAudio.src) return;
   bgAudio.play().catch(() => {});
@@ -2544,11 +2554,6 @@ audio.addEventListener("pause", () => { if (state.ambient && !audio.paused) retu
 audio.addEventListener("ended", () => { if (state.ambient) startAmbient(); });
 state.ambient = true; // música de fondo siempre activa
 state.sfx = true; // efectos siempre activos
-// Los navegadores exigen un toque antes de sonar: arranca al primer toque si estaba activado
-document.addEventListener("pointerdown", function once() {
-  document.removeEventListener("pointerdown", once);
-  if (state.ambient && audio.paused) startAmbient();
-}, { once: true });
 
 // ===== Init =====
 $("#food-options").innerHTML = FOODS.map(f => `<option value="${f.n}"></option>`).join("");
